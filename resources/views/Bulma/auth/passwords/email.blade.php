@@ -1,0 +1,1 @@
+@include('Bulma.modules.auth.passwords.email')
