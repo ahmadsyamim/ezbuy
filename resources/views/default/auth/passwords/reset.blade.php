@@ -1,0 +1,1 @@
+@include('default.modules.auth.passwords.reset')
