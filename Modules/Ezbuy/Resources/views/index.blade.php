@@ -3,7 +3,7 @@
 @section('content')
 @livewireStyles
 @push('scripts')
-@livewireScripts
+<script src="{{url("/vendor/livewire/livewire.js")}}"></script>
 <script>
     function addSearch() {
         $('.searchbtn').addClass('is-loading');
@@ -167,13 +167,8 @@
         $(document).on('click','.btn-add-product', function() {
             $('.mainDimmer').addClass('active');
         });
-        Livewire.on('postAdded', postId => {
-    alert('A post was added with the id of: ' + postId);
-})
-    window.livewire.on('ProductUpdated', function() {
-        alert('A post was added with the id of: ');
+        
     });
-});
 </script>
 @endpush
 @endsection
