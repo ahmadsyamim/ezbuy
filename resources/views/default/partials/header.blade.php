@@ -32,7 +32,36 @@
 										<li class="top-links-item"><a href="#"><img src="images/icons/flags/german.png" alt="German"> DE</a></li>
 									</ul>
 								</li>
-								<li class="top-links-item"><a href="#">Login</a>
+								@if (Auth::guest())
+								<li class="top-links-item"><a href="{{ route('login') }}">Login</a></li>
+								<li class="top-links-item"><a href="{{ route('register') }}">Register</a></li>
+								@else
+									<li class="top-links-item">
+										<a href="{{ route('voyager-frontend.account') }}">Update Account</a>
+									</li>
+									<li class="top-links-item">
+										@if (Session::has('original_user.id'))
+											<a href="#"
+											onclick="document.getElementById('impersonate-form').submit();return false;">
+												Switch back to {{ Session::get('original_user.name') }}
+											</a>
+											<form id="impersonate-form"
+												action="{{ route('voyager-frontend.account.impersonate', Session::get('original_user.id')) }}"
+												method="POST"
+												style="display: none;">
+												@csrf
+											</form>
+										@else
+											<a href="#" onclick="document.getElementById('logout-form').submit();return false;">
+												Logout
+											</a>
+											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+												@csrf
+											</form>
+										@endif
+									</li>
+								@endif
+								{{-- <li class="top-links-item"><a href="#">Login</a>
 									<div class="top-links-section">
 										<form id="top-login" autocomplete="off">
 											<div class="form-group">
@@ -50,7 +79,7 @@
 											<button class="btn btn-danger w-100" type="submit">Sign in</button>
 										</form>
 									</div>
-								</li>
+								</li> --}}
 							</ul>
 						</div><!-- .top-links end -->
 
@@ -70,8 +99,8 @@
 						<!-- Logo
 						============================================= -->
 						<div id="logo">
-							<a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Canvas Logo"></a>
-							<a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Canvas Logo"></a>
+							<a href="{{url('/')}}" class="standard-logo" data-dark-logo="{{url("images/logo-dark.png")}}"><img src="{{url("images/logo.png")}}" alt="Canvas Logo"></a>
+							<a href="{{url('/')}}" class="retina-logo" data-dark-logo="{{url("images/logo-dark@2x.png")}}"><img src="{{url("images/logo@2x.png")}}" alt="Canvas Logo"></a>
 						</div><!-- #logo end -->
 
 						<div class="header-misc">

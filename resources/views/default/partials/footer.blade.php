@@ -1,4 +1,4 @@
-        <footer class="top-footer">
+        {{-- <footer class="top-footer">
             <div class="grid-container">
                 <div class="grid-x">
                     <div class="cell medium-4 text-center medium-text-left">
@@ -32,7 +32,7 @@
                     </div> <!-- /.cell -->
                 </div> <!-- /.grid -->
             </div> <!-- /.grid-container -->
-        </footer>
+        </footer> --}}
     </div> <!-- /.off-canvas-content -->
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>

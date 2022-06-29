@@ -1,0 +1,13 @@
+{
+    "name": "Ezbuy",
+    "alias": "ezbuy",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Ezbuy\\Providers\\EzbuyServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

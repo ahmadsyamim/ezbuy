@@ -16,3 +16,9 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ server.php
 </IfModule>
+
+#Protect Directory
+#AuthName "Dialog prompt"
+#AuthType Basic
+#AuthUserFile /path/.htpasswd
+#Require valid-user

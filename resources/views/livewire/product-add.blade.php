@@ -11,5 +11,10 @@
         $('.mainDimmer').removeClass('active');
     </script>
     @endif
+    @if ($message == 'Success' && $url)
+    <script>
+        window.location.href = "{{$url}}";
+    </script>
+    @endif
 </div>
 
