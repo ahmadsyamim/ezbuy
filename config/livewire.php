@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => app()->runningInConsole() ? '' : url('/'),
+    'asset_url' => app()->runningInConsole() ? '' : env('LIVEWIRE_ASSET_URL',url('/')),
 
     /*
     |--------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 @section('content')
 @livewireStyles
 @push('scripts')
-<script src="{{url("/vendor/livewire/livewire.js")}}"></script>
+@livewireScripts
 <script>
     function addSearch() {
         $('.searchbtn').addClass('is-loading');
