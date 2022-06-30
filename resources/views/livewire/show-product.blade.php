@@ -53,39 +53,17 @@
     <div class="col-md-12 col-lg-12">
         <div class="pricing-box pricing-simple px-5 py-4 bg-light text-center text-md-start">
             @if (!$data->title)
-                {{-- @push('scripts')
-                <script>
-                    console.log('sc');
-                    $(document).ready(function() {
-                        interval = setInterval(function() {
-                            console.log('interval');
-                            Livewire.emit('refreshComponent')
-                        }, 5000);
-                    });
-                </script>
-                @endpush --}}
                 <div class="pricing-title">
                     <div class="ui active inverted dimmer">
                         <div class="ui text loader">Loading</div>
                     </div>
                 </div>
             @else
-                @push('scripts')
-                <script>
-                    console.log('sc1');
-                    $(document).ready(function() {
-                        console.log('sc1');
-                        if (typeof interval !== 'undefined') {
-                            clearInterval(interval);
-                        }
-                    });
-                </script>
-                @endpush
                 <div class="pricing-title">
                     {{-- <span class="text-danger">Most Popular</span> --}}
                     <h3>{{$data->title}}</h3>
                     @if ($data->image)
-                    <img src="{{$data->image}}" class="img-thumbnail">
+                    <img class="ui small image" src="{{$data->image}}">
                     @endif
                 </div>
                 <div class="pricing-price">
