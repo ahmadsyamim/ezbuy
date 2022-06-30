@@ -233,7 +233,7 @@
 								</li>
 								<!-- Mega Menu
 								============================================= -->
-								<li class="menu-item mega-menu"><a class="menu-link" href="#"><div>Men</div></a>
+								{{-- <li class="menu-item mega-menu"><a class="menu-link" href="#"><div>Men</div></a>
 									<div class="mega-menu-content mega-menu-style-2">
 										<div class="container">
 											<div class="row">
@@ -292,46 +292,7 @@
 											</div>
 										</div>
 									</div>
-								</li><!-- .mega-menu end -->
-								<li class="menu-item mega-menu mega-menu-small"><a class="menu-link" href="#"><div>Women</div></a>
-									<div class="mega-menu-content mega-menu-style-2">
-										<div class="container">
-											<div class="row">
-												<ul class="sub-menu-container mega-menu-column col-lg-6">
-													<li class="menu-item mega-menu-title"><a class="menu-link" href="#"><div>Footwear</div></a>
-														<ul class="sub-menu-container">
-															<li class="menu-item"><a class="menu-link" href="#"><div>Casual Shoes</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Formal Shoes</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Sports shoes</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Flip Flops</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Slippers</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Sports Sandals</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Party Shoes</div></a></li>
-														</ul>
-													</li>
-												</ul>
-												<ul class="sub-menu-container mega-menu-column col-lg-6">
-													<li class="menu-item mega-menu-title"><a class="menu-link" href="#"><div>Clothing</div></a>
-														<ul class="sub-menu-container">
-															<li class="menu-item"><a class="menu-link" href="#"><div>Casual Shirts</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>T-Shirts</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Collared Tees</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Pants / Trousers</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Ethnic Wear</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Jeans</div></a></li>
-															<li class="menu-item"><a class="menu-link" href="#"><div>Sweamwear</div></a></li>
-														</ul>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</li><!-- .mega-menu end -->
-								<li class="menu-item"><a class="menu-link" href="#"><div>Accessories</div><span>Awesome Works</span></a></li>
-								<li class="menu-item"><a class="menu-link" href="#"><div>Sale</div><span>Awesome Works</span></a></li>
-								<li class="menu-item"><a class="menu-link" href="#"><div>Blog</div><span>Latest News</span></a></li>
-								<li class="menu-item"><a class="menu-link" href="#"><div>Videos</div><span>Latest News</span></a></li>
-								<li class="menu-item"><a class="menu-link" href="#"><div>Contact</div><span>Get In Touch</span></a></li>
+								</li><!-- .mega-menu end --> --}}
 							</ul>
 
 						</nav><!-- #primary-menu end -->

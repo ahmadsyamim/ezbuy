@@ -13,6 +13,7 @@ use App\Events\ProductUpdated;
 
 class ProductAdd extends Component
 {
+    public $loading = false;
     public $search = '';
     public $message = '';
     public $url = false;
@@ -51,7 +52,9 @@ class ProductAdd extends Component
 
     public function add()
     {
+        $this->loading = true;
         // $this->message = 'Loading';
+        $this->dispatchBrowserEvent('loadUrl');
         $url = $this->search;
         if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
             $this->message = 'Invalid URL';
@@ -68,6 +71,15 @@ class ProductAdd extends Component
         $this->data = Buyforme::find($this->product_id);
         $this->message = 'Success';
         $this->url = url()->route('ezbuy.item',[$this->product_id]);
+        $this->dispatchBrowserEvent('contentChanged', ['data' => $this->data]);
+        // $this->loading = false;
+    }
+
+    public function test()
+    {
+    //  dd('x');   
+        $this->data = Buyforme::find(150);
+        $this->dispatchBrowserEvent('contentChanged', ['data' => $this->data]);
     }
 
     public function render()

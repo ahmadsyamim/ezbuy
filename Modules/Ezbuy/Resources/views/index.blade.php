@@ -164,12 +164,11 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
 <script>
-    // $(function() {
-    //     $(document).on('click','.btn-add-product', function() {
-    //         $('.mainDimmer').addClass('active');
-    //     });
-        
-    // });
+    $(function () {
+        $(document).on('click', '.btn-add-product', function () {
+            $(this).addClass('loading');
+        });
+    });
 </script>
 @endpush
 @endsection
