@@ -18,8 +18,10 @@ class ProductAdd extends Component
     public $url = false;
     public $products = [];
     public $product_id = false;
+    public $data = null;
 
-    protected $listeners = ['ProductUpdated' => 'ProductUpdated'];
+    // protected $listeners = ['ProductUpdated' => 'ProductUpdated'];
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
     public function ProductUpdated(Buyforme $product)
     {
@@ -62,6 +64,8 @@ class ProductAdd extends Component
         ]);
         // $this->scrape($this->products->id);
         $this->product_id = $this->products->id;
+        // $this->data = $this->products;
+        $this->data = Buyforme::find($this->product_id);
         $this->message = 'Success';
         $this->url = url()->route('ezbuy.item',[$this->product_id]);
     }
@@ -69,6 +73,7 @@ class ProductAdd extends Component
     public function render()
     {
         return view('livewire.product-add', [
+            'data' => $this->data,
             // 'products' => User::where('name', 'like', '%'.$this->search.'%')->get(),
         ]);
     }

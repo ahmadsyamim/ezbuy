@@ -5,31 +5,31 @@
 @push('scripts')
 @livewireScripts
 <script>
-    function addSearch() {
-        $('.searchbtn').addClass('is-loading');
-        var data = $( "#addSearchForm" ).serialize();
+    // function addSearch() {
+    //     $('.searchbtn').addClass('is-loading');
+    //     var data = $( "#addSearchForm" ).serialize();
         
-        var jqxhr = $.post( "{{url('/api/addSearch')}}", data, function() {
-      alert( "success" );
-    })
-      .done(function() {
-        alert( "second success" );
-      })
-      .fail(function() {
-        alert( "error" );
-      })
-      .always(function() {
-          alert( "finished" );
-          $('.searchbtn').removeClass('is-loading');
-      });
+    //     var jqxhr = $.post( "{{url('/api/addSearch')}}", data, function() {
+    //   alert( "success" );
+    // })
+    //   .done(function() {
+    //     alert( "second success" );
+    //   })
+    //   .fail(function() {
+    //     alert( "error" );
+    //   })
+    //   .always(function() {
+    //       alert( "finished" );
+    //       $('.searchbtn').removeClass('is-loading');
+    //   });
      
-    // Perform other work here ...
+    // // Perform other work here ...
      
-    // Set another completion function for the request above
-    // jqxhr.always(function() {
-    //   alert( "second finished" );
-    // });
-    }
+    // // Set another completion function for the request above
+    // // jqxhr.always(function() {
+    // //   alert( "second finished" );
+    // // });
+    // }
 </script>
 @endpush
 
@@ -44,12 +44,12 @@
 					</div>
 
 					<ul class="clients-grid grid-2 grid-sm-3 grid-md-6 mb-0">
-						<li class="grid-item"><a href="#"><img src="images/clients/logo/1.png" alt="Clients"></a></li>
-						<li class="grid-item"><a href="#"><img src="images/clients/logo/2.png" alt="Clients"></a></li>
-						<li class="grid-item"><a href="#"><img src="images/clients/logo/3.png" alt="Clients"></a></li>
-						<li class="grid-item"><a href="#"><img src="images/clients/logo/4.png" alt="Clients"></a></li>
-						<li class="grid-item"><a href="#"><img src="images/clients/logo/5.png" alt="Clients"></a></li>
-						<li class="grid-item"><a href="#"><img src="images/clients/logo/6.png" alt="Clients"></a></li>
+						<li class="grid-item"><a href="#"><img src="{{url("images/clients/mercari.png")}}" alt="Clients"></a></li>
+						<li class="grid-item"><a href="#"><img src="{{url("images/clients/yahoo-cs.png")}}" alt="Clients"></a></li>
+						<li class="grid-item"><a href="#"><img src="{{url("images/clients/comingsoon.png")}}" alt="Clients"></a></li>
+						<li class="grid-item"><a href="#"><img src="{{url("images/clients/comingsoon.png")}}" alt="Clients"></a></li>
+						<li class="grid-item"><a href="#"><img src="{{url("images/clients/comingsoon.png")}}" alt="Clients"></a></li>
+						<li class="grid-item"><a href="#"><img src="{{url("images/clients/comingsoon.png")}}" alt="Clients"></a></li>
 						{{-- <li class="grid-item"><a href="#"><img src="images/clients/logo/7.png" alt="Clients"></a></li>
 						<li class="grid-item"><a href="#"><img src="images/clients/logo/8.png" alt="Clients"></a></li>
 						<li class="grid-item"><a href="#"><img src="images/clients/logo/9.png" alt="Clients"></a></li>
@@ -82,7 +82,8 @@
 
 								{{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias.</p> --}}
 
-								<livewire:product-add /> 
+								
+								@livewire('product-add')
                                 {{-- <div class="input-group" style="max-width:400px;">
                                     <div class="input-group-text"><i class="icon-calculator1"></i></div>
                                     <input type="text" name="link" class="form-control required" placeholder="Enter your product link">
@@ -163,12 +164,12 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
 <script>
-    $(function() {
-        $(document).on('click','.btn-add-product', function() {
-            $('.mainDimmer').addClass('active');
-        });
+    // $(function() {
+    //     $(document).on('click','.btn-add-product', function() {
+    //         $('.mainDimmer').addClass('active');
+    //     });
         
-    });
+    // });
 </script>
 @endpush
 @endsection

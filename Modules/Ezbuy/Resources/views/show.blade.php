@@ -5,7 +5,27 @@
 @push('scripts')
 @livewireScripts
 <script>
-   
+    $(document).ready(function () {
+        $.fn.api.settings.api = {
+            'get followers': '/followers/{id}?results={count}',
+            'create user': '/create',
+            'follow user': '/follow',
+            'add user': '/add/{id}',
+            'search': '/query/{query}/{/sort}'
+        };
+        $('.follow.button')
+            .api({
+                action: 'follow user',
+                on: 'now'
+            });
+
+        $.ajax({
+            url: "test.html",
+            context: document.body
+        }).done(function () {
+            $(this).addClass("done");
+        });
+    });
 </script>
 @endpush
 
@@ -15,51 +35,9 @@
 			<div class="">
 				<div class="container clearfix">
 
-					<div class="row pricing col-mb-30 mb-4 d-flex justify-content-center">
+					@livewire('show-product', ['data' => $data])
 
-						<div class="col-md-6 col-lg-4">
-
-							<div class="pricing-box pricing-simple px-5 py-4 bg-light text-center text-md-start">
-								<div class="pricing-title">
-									{{-- <span class="text-danger">Most Popular</span> --}}
-									<h3>{{$data->title}}</h3>
-                                    @if ($data->image)
-                                    <img src="{{$data->image}}" class="img-thumbnail">
-                                    @endif
-								</div>
-								<div class="pricing-price">
-									{{-- <span class="price-unit">€</span> --}}
-                                    {{$data->sellprice}}
-								</div>
-								<div class="pricing-features">
-									<ul class="iconlist">
-										{{-- <li><i class="icon-check text-smaller"></i> <strong>Premium</strong> Plugins</li> --}}
-										{{-- <li><i class="icon-check text-smaller"></i> <strong>SEO</strong> Features</li> --}}
-										<li><i class="icon-check text-smaller"></i> <strong>Full</strong> Access</li>
-										{{-- <li><i class="icon-check text-smaller"></i> <strong>100</strong> User Accounts</li> --}}
-										{{-- <li><i class="icon-check text-smaller"></i> <strong>1 Year</strong> License</li> --}}
-										{{-- <li><i class="icon-check text-smaller"></i> <strong>24/7</strong> Support</li> --}}
-									</ul>
-								</div>
-                                @auth
-                                <div class="pricing-action d-flex justify-content-center"">
-                                    <a href="#" class="btn btn-danger btn-lg">Get Started</a>
-                                </div>
-                                @else
-                                <div class="pricing-action d-flex justify-content-center"">
-                                <a href="#" class="btn btn-danger btn-lg">Login</a>
-                                </div>
-                                <div class="pricing-action d-flex justify-content-center"">
-                                <a href="#" class="btn btn-danger btn-lg">Register</a>
-                                </div>
-                                @endauth
-							</div>
-
-						</div>
-
-					</div>
 				</div>
-
 			</div>
 		</section><!-- #content end -->
 

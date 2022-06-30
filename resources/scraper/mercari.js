@@ -17,25 +17,39 @@ let id = 0;
 if (argv('id')) {
   id = argv('id');
 }
-//console.log('id:',id);
 
-let noloop = 0;
+let noloop = false;
 if (argv('noloop')) {
   noloop = true;
 }
-//console.log('noloop:',noloop);
+
+let debug = false;
+if (argv('debug')) {
+    debug = true;
+}
 
 try {
-  path = '../../.env';
-  if (!fs.existsSync(path)) {
-    //file exists
     path = '.env';
-  } 
+    if (!fs.existsSync(path)) {
+        //file exists
+        path = '../../.env';
+        if (!fs.existsSync(path)) {
+            throw 'no .env';
+        }
+    } 
 } catch(err) {
-  console.error(err)
+    throw err;
 }
+
 dotenv.config({ path: path });
-//console.log('DB_HOST',process.env.DB_HOST)
+
+if (debug) {
+    console.log(process.env);
+    console.log('id:',id);
+    console.log('noloop:',noloop);
+    console.log('path:',path);
+    console.log('DB_HOST',process.env.DB_HOST)
+}
 
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
@@ -55,27 +69,29 @@ var con = mysql.createConnection({
     database: process.env.DB_DATABASE,
 });
 
+con.connect(function (err) {
+    if (err) throw err;
+});
+
 (function loop() {
     setTimeout(function () {
         // execute script
         var date = new Date();
-        //console.log('start = ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
-
         var resultdata = 0;
-
-        con.connect(function (err) {
+        
+        //"SELECT * FROM buyformes where status = '0'"
+        let query = "SELECT * FROM buyformes where status = '0' or status is null";
+        if (id) {
+        query = "SELECT * FROM buyformes WHERE id='"+id+"'";
+    }
+    if (debug) {
+            console.log('start = ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+            console.log('query:',query);
+        }
+        // con.query("SELECT * FROM buyformes where status = '0'", function (err, result, fields) {
+        con.query(query, function (err, result, fields) {
             if (err) throw err;
-            //"SELECT * FROM buyformes where status = '0'"
-            let query = "SELECT * FROM buyformes";
-            if (id) {
-              query = "SELECT * FROM buyformes WHERE id='"+id+"'";
-            }
-            //console.log('query:',query);
-            // con.query("SELECT * FROM buyformes where status = '0'", function (err, result, fields) {
-            con.query(query, function (err, result, fields) {
-                if (err) throw err;
-                resultdata = result;
-            });
+            resultdata = result;
         });
 
         const Billplz = require('billplz');
@@ -282,7 +298,10 @@ async function mercaricheck(browser, url, inquiryid, con) {
     //console.log(modalprice + ' ' + categorylink + ' ' + status);
 
     var sql = "UPDATE buyformes SET title = '" + title + "', image = '" + image + "', status = " + status + ", takeprice = " + modalprice + ", sellprice = " + modalprice + " , categorylink = '" + categorylink + "' where id = '" + inquiryid + "'";
-    //console.log(sql);
+    if (debug) {
+        // console.log('query:',query);
+        console.log(sql);
+    }
 
     con.query(sql, function (err, result) {
         if (err) throw err;
