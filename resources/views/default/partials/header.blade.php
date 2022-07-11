@@ -9,7 +9,7 @@
 
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
-						<p class="mb-0 py-2 text-center text-md-start"><strong>Call:</strong> 1800-547-2145 | <strong>Email:</strong> info@canvas.com</p>
+						<p class="mb-0 py-2 text-center text-md-start"><strong>Call:</strong> {{setting('site.phone_number')}} | <strong>Email:</strong> {{setting('site.email')}}</p>
 					</div>
 
 					<div class="col-12 col-md-auto">
@@ -18,19 +18,19 @@
 						============================================= -->
 						<div class="top-links on-click">
 							<ul class="top-links-container">
-								<li class="top-links-item"><a href="#">USD</a>
-									<ul class="top-links-sub-menu">
+								<li class="top-links-item"><a href="#">MYR</a>
+									{{-- <ul class="top-links-sub-menu">
 										<li class="top-links-item"><a href="#">EUR</a></li>
 										<li class="top-links-item"><a href="#">AUD</a></li>
 										<li class="top-links-item"><a href="#">GBP</a></li>
-									</ul>
+									</ul> --}}
 								</li>
 								<li class="top-links-item"><a href="#">EN</a>
-									<ul class="top-links-sub-menu">
+									{{-- <ul class="top-links-sub-menu">
 										<li class="top-links-item"><a href="#"><img src="images/icons/flags/french.png" alt="French"> FR</a></li>
 										<li class="top-links-item"><a href="#"><img src="images/icons/flags/italian.png" alt="Italian"> IT</a></li>
 										<li class="top-links-item"><a href="#"><img src="images/icons/flags/german.png" alt="German"> DE</a></li>
-									</ul>
+									</ul> --}}
 								</li>
 								@if (Auth::guest())
 								<li class="top-links-item"><a href="{{ route('login') }}">Login</a></li>
@@ -113,7 +113,7 @@
 
 							<!-- Top Cart
 							============================================= -->
-							<div id="top-cart" class="header-misc-icon d-none d-sm-block">
+							{{-- <div id="top-cart" class="header-misc-icon d-none d-sm-block">
 								<a href="#" id="top-cart-trigger"><i class="icon-line-bag"></i><span class="top-cart-number">5</span></a>
 								<div class="top-cart-content">
 									<div class="top-cart-title">
@@ -150,7 +150,7 @@
 										<a href="#" class="button button-3d button-small m-0">View Cart</a>
 									</div>
 								</div>
-							</div><!-- #top-cart end -->
+							</div><!-- #top-cart end --> --}}
 
 						</div>
 
@@ -163,8 +163,9 @@
 						<nav class="primary-menu">
 
 							<ul class="menu-container">
-								<li class="menu-item current"><a class="menu-link" href="#"><div>Home</div></a>
-									<ul class="sub-menu-container">
+								<li class="menu-item"><a class="menu-link" href="{{url('/')}}"><div>Home</div></a></li>
+								{{-- <li class="menu-item current"><a class="menu-link" href="#"><div>Home</div></a> --}}
+									{{-- <ul class="sub-menu-container">
 										<li class="menu-item"><a class="menu-link" href="index-corporate.html"><div>Home - Corporate</div></a>
 											<ul class="sub-menu-container">
 												<li class="menu-item"><a class="menu-link" href="index-corporate.html"><div>Corporate - Layout 1</div></a></li>
@@ -172,8 +173,8 @@
 												<li class="menu-item"><a class="menu-link" href="index-corporate-3.html"><div>Corporate - Layout 3</div></a></li>
 												<li class="menu-item"><a class="menu-link" href="index-corporate-4.html"><div>Corporate - Layout 4</div></a></li>
 											</ul>
-										</li>
-										<li class="menu-item"><a class="menu-link" href="index-portfolio.html"><div>Home - Portfolio</div></a>
+										</li> --}}
+										{{-- <li class="menu-item"><a class="menu-link" href="index-portfolio.html"><div>Home - Portfolio</div></a>
 											<ul class="sub-menu-container">
 												<li class="menu-item"><a class="menu-link" href="index-portfolio.html"><div>Portfolio - Layout 1</div></a></li>
 												<li class="menu-item"><a class="menu-link" href="index-portfolio-2.html"><div>Portfolio - Layout 2</div></a></li>
@@ -228,9 +229,9 @@
 										<li class="menu-item"><a class="menu-link" href="index-restaurant.html"><div>Home - Restaurant</div></a></li>
 										<li class="menu-item"><a class="menu-link" href="index-events.html"><div>Home - Events</div></a></li>
 										<li class="menu-item"><a class="menu-link" href="index-parallax.html"><div>Home - Parallax</div></a></li>
-										<li class="menu-item"><a class="menu-link" href="index-app-showcase.html"><div>Home - App Showcase</div></a></li>
-									</ul>
-								</li>
+										<li class="menu-item"><a class="menu-link" href="index-app-showcase.html"><div>Home - App Showcase</div></a></li> --}}
+									{{-- </ul> --}}
+								{{-- </li> --}}
 								<!-- Mega Menu
 								============================================= -->
 								{{-- <li class="menu-item mega-menu"><a class="menu-link" href="#"><div>Men</div></a>
