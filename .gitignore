@@ -16,3 +16,4 @@ yarn-error.log
 /.vscode
 /user_data
 /resources/scraper/user_data
+composer.lock
