@@ -23,7 +23,7 @@
 			<div class="content-wrap">
 				<div class="container clearfix">
 
-					<div class="form-widget">
+					<div> <!--form-widget-->
 
 						<div class="form-result"></div>
 
