@@ -26,6 +26,12 @@
 
 <body class="stretched">
 
+	@if (request()->get('intended'))
+		@php
+		Session::put('url.intended', request()->get('intended'));  
+		@endphp
+	@endif
+
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="clearfix">

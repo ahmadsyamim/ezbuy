@@ -68,7 +68,7 @@
                 </div>
                 <div class="pricing-price">
                     {{-- <span class="price-unit">€</span> --}}
-                    {{$data->sellprice}}
+                    {{money($data->sellprice, 'MYR')}}
                 </div>
                 <div class="pricing-features">
                     <ul class="iconlist">
@@ -86,7 +86,7 @@
                 </div>
                 @else
                 <div class="pricing-action d-flex justify-content-center"">
-                <a href="{{route('login')}}" class="btn btn-danger btn-lg">Login</a>
+                <a href="{{route('login', ['intended' => route('ezbuy.item', ['id' => $data->id]) ])}}" class="btn btn-danger btn-lg">Login</a>
                 </div>
                 <div class="pricing-action d-flex justify-content-center"">
                 <a href="{{route('register')}}" class="btn btn-danger btn-lg">Register</a>

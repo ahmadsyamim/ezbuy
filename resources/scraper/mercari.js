@@ -222,6 +222,7 @@ async function mercaricheck(browser, url, inquiryid, con) {
 
     // check price.
     var modalprice = 0;
+    var sellprice = 0;
     var styleNumbers = await page.$$('mer-price');
     for (let styleNumber of styleNumbers) {
       //console.log('styleNumber',styleNumber)
@@ -229,6 +230,7 @@ async function mercaricheck(browser, url, inquiryid, con) {
             ////console.log( await ( await styleNumber.getProperty( 'value' ) ).jsonValue() );
             if (modalprice == 0) {
                 modalprice = await (await styleNumber.getProperty('value')).jsonValue();
+                sellprice = parseInt(parseInt(parseFloat(modalprice)*0.04)+'00');
             }
         } catch (e) {
             //console.log(`Could not get the style number:`, e.message);
@@ -297,7 +299,8 @@ async function mercaricheck(browser, url, inquiryid, con) {
 
     //console.log(modalprice + ' ' + categorylink + ' ' + status);
 
-    var sql = "UPDATE buyformes SET title = '" + title + "', image = '" + image + "', status = " + status + ", takeprice = " + modalprice + ", sellprice = " + modalprice + " , categorylink = '" + categorylink + "' where id = '" + inquiryid + "'";
+
+    var sql = "UPDATE buyformes SET title = '" + title + "', image = '" + image + "', status = " + status + ", takeprice = " + modalprice + ", sellprice = " + sellprice + " , categorylink = '" + categorylink + "' where id = '" + inquiryid + "'";
     if (debug) {
         // console.log('query:',query);
         console.log(sql);

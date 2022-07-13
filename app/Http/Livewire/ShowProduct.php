@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Buyforme;
 
 class ShowProduct extends Component
 {
@@ -28,12 +29,18 @@ class ShowProduct extends Component
         $user = auth()->user();
         $email = $user->email;
         $name = $user->name;
+        $mobile = $user->phone_number;
+        $link = route('ezbuy.item', ['id' => $this->data->id]);
         //email => email customer
         //mobile =? no tel customer 
         //name => nama customer 
         //amount => nilai ( 100 =  RM1.00)
         //product link => link barang   
         $amount = $this->data->sellprice;
+
+        if ($this->data->paymentlink) {
+            return redirect($this->data->paymentlink);
+        }
 
         $url = "https://www.billplz.com/api/v3/bills";
 
@@ -61,9 +68,18 @@ class ShowProduct extends Component
         // var_dump($resp);
 
         $resp = json_decode($resp);
-        $payurl = $resp->url;
 
-        return redirect($payurl);
+        $billid = $resp->id;
+        $paymentlink = $resp->url;
+        
+        //update 
+        $Buyforme = Buyforme::find($this->data->id);
+        $Buyforme->billid = $billid;
+        $Buyforme->paymentlink = $paymentlink;
+        $Buyforme->save();
+        $this->data = $Buyforme;
+
+        return redirect($paymentlink);
     }
 
     public function paycheck($signkey = 'S-ERrIvtf1G_Nx18O3yK82wg')
