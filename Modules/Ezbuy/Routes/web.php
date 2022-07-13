@@ -23,3 +23,8 @@ Route::prefix('ezbuy')->group(function() {
 Route::prefix('api')->group(function() {
     Route::post('/addSearch', 'EzbuyController@addSearch');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/watchlist', 'EzbuyController@watchlist');
+    Route::get('/orderlist', 'EzbuyController@orderlist');
+});

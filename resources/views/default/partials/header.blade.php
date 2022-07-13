@@ -126,8 +126,13 @@
 						<nav class="primary-menu">
 
 							<ul class="menu-container">
+								@if (Auth::guest())
 								<li class="menu-item"><a class="menu-link" href="#"><div>Home</div><span>Awesome Works</span></a></li>
 								<li class="menu-item"><a class="menu-link" href="#"><div>Contact Us</div><span>Awesome Works</span></a></li>
+								@else
+								<li class="menu-item"><a class="menu-link" href="{{ url('/watchlist') }}"><div>Watch List</div><span>Awesome Works</span></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/orderlist') }}"><div>Order List</div><span>Awesome Works</span></a></li>
+								@endif
 							</ul>
 
 						</nav><!-- #primary-menu end -->
