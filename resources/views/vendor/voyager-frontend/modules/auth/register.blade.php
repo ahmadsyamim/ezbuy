@@ -80,7 +80,7 @@
 												<label for="fitness-form-phone">Phone:</label>
 											</div>
 											<div class="col-sm-10">
-												<input type="text" name="fitness-form-phone" id="fitness-form-phone" class="form-control required" value="" placeholder="Your Contact Number">
+												<input type="text" name="phone_number" id="fitness-form-phone" class="form-control required" value="" placeholder="Your Contact Number">
 											</div>
 										</div>
 									</div>
@@ -91,10 +91,10 @@
 											</div>
 											<div class="col-sm-6">
 												<div class="btn-group d-flex" role="group">
-													<input type="radio" class="btn-check required" name="fitness-form-sex" id="fitness-form-male" value="Male">
+													<input type="radio" class="btn-check required" name="gender" id="fitness-form-male" value="male">
 													<label for="fitness-form-male" class="btn btn-outline-dark font-body ls0 nott">Male</label>
 
-													<input type="radio" class="btn-check required" name="fitness-form-sex" id="fitness-form-female" value="Female">
+													<input type="radio" class="btn-check required" name="gender" id="fitness-form-female" value="female">
 													<label for="fitness-form-female" class="btn btn-outline-dark font-body ls0 nott">Female</label>
 												</div>
 											</div>
@@ -132,7 +132,7 @@
 											</div>
 											<div class="col-sm-5">
 												<div class="input-group">
-                                                    <input type="text" name="fitness-form-phone" id="fitness-form-phone" class="form-control required" value="" placeholder="Postcode">
+                                                    <input type="text" name="postcode" id="fitness-form-phone" class="form-control required" value="" placeholder="Postcode">
 												</div>
 											</div>
 										</div>
@@ -143,7 +143,7 @@
 												<label for="fitness-form-phone">Address:</label>
 											</div>
 											<div class="col-sm-10">
-                                                <textarea name="event-registration-bio" id="event-registration-bio" class="form-control required" cols="30" rows="5"></textarea>
+                                                <textarea name="address" id="event-registration-bio" class="form-control required" cols="30" rows="5"></textarea>
 											</div>
 										</div>
 									</div>

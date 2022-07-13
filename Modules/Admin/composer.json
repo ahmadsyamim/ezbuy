@@ -1,0 +1,35 @@
+{
+    "name": "ahmadsyamim/admin-module",
+    "description": "",
+    "type": "laravel-module",
+    "authors": [
+        {
+            "name": "Ahmad Syamim",
+            "email": "ahmad.syamim@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Admin\\": ""
+        }
+    },
+    "require": {
+        "tcg/voyager": "^1.5",
+        "ahmadsyamim/voyager-frontend": "dev-master",
+        "titasgailius/terminal": "^1.0",
+        "ahmadsyamim/laravel-language": "dev-master",
+        "akaunting/laravel-money": "^1.2"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan vendor:publish --provider=Modules\\Admin\\Providers\\AdminServiceProvider"
+        ]
+    }
+}
