@@ -14,7 +14,20 @@ class EzbuyController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+
+    public function orderlist()
+    {
+        // die('orderlist');
+        return view('ezbuy::orderlist');
+    }
+
+    public function watchlist()
+    {
+        // die('watchlist123');
+        return view('ezbuy::watchlist');
+    }
+
+     public function index()
     {
         $data = Product::all();
         return view('ezbuy::index')->with('data',$data);
