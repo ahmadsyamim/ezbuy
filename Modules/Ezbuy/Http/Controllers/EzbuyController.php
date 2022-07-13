@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Ezbuy\Entities\Product;
 use App\Models\Buyforme;
+use Illuminate\Support\Facades\Auth;
 
 class EzbuyController extends Controller
 {
@@ -22,9 +23,11 @@ class EzbuyController extends Controller
     }
 
     public function watchlist()
-    {
-        // die('watchlist123');
-        return view('ezbuy::watchlist');
+    {   
+        $lists = Buyforme::where('user',1)->whereIn('status',[0,1])->paginate(4);
+        // print_r($lists);
+        // die;
+        return view('ezbuy::watchlist',compact('lists'));
     }
 
      public function index()
