@@ -82,7 +82,7 @@
                 </div>
                 @auth
                 <div class="pricing-action d-flex justify-content-center"">
-                    <div wire:click="createbill" wire:loading.class="loading" class="ui red button large">Get Started</div>
+                    <div wire:click="createbill" wire:loading.class="loading" class="ui red button large">pay Here</div>
                 </div>
                 @else
                 <div class="pricing-action d-flex justify-content-center"">
