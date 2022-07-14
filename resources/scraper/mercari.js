@@ -104,84 +104,13 @@ con.connect(function (err) {
                 headless: true,
                 userDataDir: "./user_data"
             });
-
             for (let i = 0; i < resultdata.length; i++) {
-
-
                 try {
                     var infos = await mercaricheck(browser, resultdata[i]['producturl'], resultdata[i]['id'], con);
-                    //console.log(infos);
                 } catch (error) {
                     // code to run if there are any problems
                 } finally {
-                    // con.query("SELECT * FROM buyformes where id = '"+resultdata[i]['id']+"'", function (err, result, fields) {
-                    //   if (err) throw err;
-                    //   //console.log('status is '+ result['0']['status']);
-
-                    //     if (result['0']['status'] == 0) {
-
-                    //         (async () => {
-
-                    //             //console.log("SELECT * FROM users where id = '"+result['0']['user']+"'");
-                    //             con.query("SELECT * FROM users where id = '"+result['0']['user']+"'", function (err, userdetail, fields) {
-
-                    //           let name = "noname";
-                    //           let email = "nonoemail@gmail.com";
-                    //             if(userdetail.length != 0 ) {
-                    //               //console.log("kahkah");
-                    //               email = userdetail['0']['email'];
-                    //               name = userdetail['0']['name'];
-                    //             }
-
-                    //                 //console.log(userdetail);
-                    //                 billplz.create_bill({
-                    //                   'collection_id': 'cjfpv4n1',
-                    //                   'description': resultdata[i]['producturl'],
-                    //                   'email': email,
-                    //                   'name': name,
-                    //                   'amount': infos['sellprice']*100, //RM5.50
-                    //                   'callback_url': "http://127.0.0.1:8000/home",
-                    //                   'redirect_url': "http://127.0.0.1:8000/home",
-                    //                   // 'due_at': '2020-10-31'
-                    //                 }, function(err, res) {
-                    //                   //console.log(res)
-
-                    //                   var sql = "UPDATE buyformes SET status = "+infos['status']+", takeprice = "+infos['takeprice']+", sellprice = "+infos['sellprice']+", billid = '"+res['id'] +", paymentlink = '"+res['url']+"' where id = '"+resultdata[i]['id']+"'";
-                    //                   //console.log(sql);
-
-                    //                   con.query(sql, function (err, result) {
-                    //                     if (err) throw err;
-                    //                     //console.log(resultdata[i]['id']+" records updated");
-                    //                   });
-
-                    //                   browser.close();
-                    //                   // var urlbillplz = res['url'];
-                    //                 })
-
-
-
-
-                    //             });
-
-
-
-                    //         })();
-
-                    //     };
-
-                    // });
-
-
                 }
-
-
-
-
-
-
-
-
-
             }
             var date = new Date();
             //console.log('END = ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
@@ -245,9 +174,7 @@ async function mercaricheck(browser, url, inquiryid, con) {
         try {
             link = await (await href.getProperty('href')).jsonValue();
             if (link.includes("t3_category_id=")) {
-
                 categorylink = link;
-
             }
         } catch (e) {
             //console.log(`Could not get the style number:`, e.message);
@@ -272,8 +199,6 @@ async function mercaricheck(browser, url, inquiryid, con) {
           //console.log(`Could not get the style number:`, e.message);
       }
   }
-  //console.log('image',image);
-
   // save image
   // download('https://static.mercdn.net/item/detail/orig/photos/m58070190360_1.jpg?1611957158', 'google.png', function(){
   //   //console.log('done');
@@ -283,22 +208,6 @@ async function mercaricheck(browser, url, inquiryid, con) {
   var title = 0;
   var n = await page.$('mer-heading[data-testid="name"]');
   title = await (await n.getProperty('titleLabel')).jsonValue();
-
-  // for (let styleNumber of styleNumbers) {
-  //     try {
-  //         if (title == 0) {
-  //           // title = await (await styleNumber.getAttribute('title-label'));
-  //           title = await (await styleNumber.getProperty('title-label')).jsonValue();
-  //         }
-  //     } catch (e) {
-  //         //console.log(`Could not get the style number:`, e.message);
-  //     }
-  // }
-  //console.log('title',title);
-
-
-    //console.log(modalprice + ' ' + categorylink + ' ' + status);
-
 
     var sql = "UPDATE buyformes SET title = '" + title + "', image = '" + image + "', status = " + status + ", takeprice = " + modalprice + ", sellprice = " + sellprice + " , categorylink = '" + categorylink + "' where id = '" + inquiryid + "'";
     if (debug) {
@@ -310,27 +219,9 @@ async function mercaricheck(browser, url, inquiryid, con) {
         if (err) throw err;
         //console.log(inquiryid + " record updated");
     });
-
-
     await page.close();
-
-
-    // infos = {
-    //     "status": status,
-    //     "takeprice": modalprice,
-    //     "sellprice": (cleanmodalprice*0.04),
-    //     // "sizes": sizes,
-    //     // "pictures": pictures
-    // };
-
-
     return infos;
-
-
 }
-
-
-
 
 async function autoScroll(page) {
     await page.evaluate(async () => {
@@ -350,22 +241,3 @@ async function autoScroll(page) {
         });
     });
 }
-
-
-
-
-
-// var url = 'https://www.mercari.com/jp/items/m85312982627/?_s=U2FsdGVkX19tzrTYdyf1fT5cAWoJhMhBY4gzJBTGqy_wH4VGtnjDAbKawQXzyXocwDu1jpCDU43vWE-2kMhz7-9o7hwBJZ1QsBpudMkHwQDiupUHsJkG_WrIyOJeyW3x';
-
-// var productcode = url.substring(
-//   url.lastIndexOf("mercari.com/jp/items") + 21,
-//   url.lastIndexOf("/")
-// );
-
-//  //console.log(productcode);
-
-// await page.goto('https://www.mercari.com/jp/transaction/buy/'+productcode+'/');
-
-// await page.waitFor(2000);
-// await page.click('button[data-test="transaction-buy-purchase"]');
-// await page.waitFor(5000);
