@@ -18,16 +18,21 @@ class EzbuyController extends Controller
 
     public function orderlist()
     {
-        // die('orderlist');
-        return view('ezbuy::orderlist');
+        $limit=10;
+        $lists = Buyforme::where('user',1)->whereIn('status',[0,1])->paginate($limit);
+        $ttlpage = (ceil($lists->total() / $limit));
+
+
+        return view('ezbuy::orderlist',compact('lists','ttlpage'));
     }
 
     public function watchlist()
     {   
-        $lists = Buyforme::where('user',1)->whereIn('status',[0,1])->paginate(4);
-        // print_r($lists);
-        // die;
-        return view('ezbuy::watchlist',compact('lists'));
+        $limit=8;
+        $lists = Buyforme::where('user',1)->whereIn('status',[0,1])->paginate($limit);
+        $ttlpage = (ceil($lists->total() / $limit));
+
+        return view('ezbuy::watchlist',compact('lists','ttlpage'));
     }
 
      public function index()
