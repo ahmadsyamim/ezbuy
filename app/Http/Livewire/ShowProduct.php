@@ -36,7 +36,8 @@ class ShowProduct extends Component
         //name => nama customer 
         //amount => nilai ( 100 =  RM1.00)
         //product link => link barang   
-        $amount = $this->data->sellprice;
+        $amount = ($this->data->sellprice * config('app.rate')) + $this->data->shippingfee + $this->data->servicefee;
+        $amount = $amount*100;
 
         if ($this->data->paymentlink) {
             return redirect($this->data->paymentlink);

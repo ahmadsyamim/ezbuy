@@ -79,247 +79,6 @@
 
 							</div>
 
-							<div class="tab-content" id="tabs-10">
-
-								<div class="shop row gutter-30">
-
-									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
-										<div class="grid-inner">
-											<div class="product-image">
-												<a href="#"><img src="images/shop/sunglasses/1.jpg" alt="Unisex Sunglasses"></a>
-												<a href="#"><img src="images/shop/sunglasses/1-1.jpg" alt="Unisex Sunglasses"></a>
-												<div class="sale-flash badge bg-danger p-2">Sale!</div>
-												<div class="bg-overlay">
-													<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-														<a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-														<a href="include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-													</div>
-													<div class="bg-overlay-bg bg-transparent"></div>
-												</div>
-											</div>
-											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">Unisex Sunglasses</a></h3></div>
-												<div class="product-price"><del>$19.99</del> <ins>$11.99</ins></div>
-												<div class="product-rating">
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star-empty"></i>
-													<i class="icon-star-empty"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
-										<div class="grid-inner">
-											<div class="product-image">
-												<a href="#"><img src="images/shop/tshirts/1.jpg" alt="Blue Round-Neck Tshirt"></a>
-												<a href="#"><img src="images/shop/tshirts/1-1.jpg" alt="Blue Round-Neck Tshirt"></a>
-												<div class="bg-overlay">
-													<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-														<a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-														<a href="include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-													</div>
-													<div class="bg-overlay-bg bg-transparent"></div>
-												</div>
-											</div>
-											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">Blue Round-Neck Tshirt</a></h3></div>
-												<div class="product-price">$9.99</div>
-												<div class="product-rating">
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star-half-full"></i>
-													<i class="icon-star-empty"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
-										<div class="grid-inner">
-											<div class="product-image">
-												<a href="#"><img src="images/shop/watches/1.jpg" alt="Silver Chrome Watch"></a>
-												<a href="#"><img src="images/shop/watches/1-1.jpg" alt="Silver Chrome Watch"></a>
-												<div class="bg-overlay">
-													<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-														<a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-														<a href="include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-													</div>
-													<div class="bg-overlay-bg bg-transparent"></div>
-												</div>
-											</div>
-											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">Silver Chrome Watch</a></h3></div>
-												<div class="product-price">$129.99</div>
-												<div class="product-rating">
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star-half-full"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
-										<div class="grid-inner">
-											<div class="product-image">
-												<a href="#"><img src="images/shop/shoes/2.jpg" alt="Men Grey Casual Shoes"></a>
-												<a href="#"><img src="images/shop/shoes/2-1.jpg" alt="Men Grey Casual Shoes"></a>
-												<div class="sale-flash badge bg-danger p-2">Sale!</div>
-												<div class="bg-overlay">
-													<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-														<a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-														<a href="include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-													</div>
-													<div class="bg-overlay-bg bg-transparent"></div>
-												</div>
-											</div>
-											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">Men Grey Casual Shoes</a></h3></div>
-												<div class="product-price"><del>$45.99</del> <ins>$39.49</ins></div>
-												<div class="product-rating">
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star-half-full"></i>
-													<i class="icon-star-empty"></i>
-													<i class="icon-star-empty"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
-							<div class="tab-content" id="tabs-11">
-
-								<div class="shop row gutter-30">
-
-									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
-										<div class="grid-inner">
-											<div class="product-image">
-												<div class="fslider" data-arrows="false">
-													<div class="flexslider">
-														<div class="slider-wrap">
-															<div class="slide"><a href="#"><img src="images/shop/dress/3.jpg" alt="Pink Printed Dress"></a></div>
-															<div class="slide"><a href="#"><img src="images/shop/dress/3-1.jpg" alt="Pink Printed Dress"></a></div>
-															<div class="slide"><a href="#"><img src="images/shop/dress/3-2.jpg" alt="Pink Printed Dress"></a></div>
-														</div>
-													</div>
-												</div>
-												<div class="bg-overlay">
-													<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-														<a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-														<a href="include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-													</div>
-													<div class="bg-overlay-bg bg-transparent"></div>
-												</div>
-											</div>
-											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">Pink Printed Dress</a></h3></div>
-												<div class="product-price">$39.49</div>
-												<div class="product-rating">
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star-empty"></i>
-													<i class="icon-star-empty"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
-										<div class="grid-inner">
-											<div class="product-image">
-												<a href="#"><img src="images/shop/pants/5.jpg" alt="Green Trousers"></a>
-												<a href="#"><img src="images/shop/pants/5-1.jpg" alt="Green Trousers"></a>
-												<div class="sale-flash badge bg-danger p-2">Sale!</div>
-												<div class="bg-overlay">
-													<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-														<a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-														<a href="include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-													</div>
-													<div class="bg-overlay-bg bg-transparent"></div>
-												</div>
-											</div>
-											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">Green Trousers</a></h3></div>
-												<div class="product-price"><del>$24.99</del> <ins>$21.99</ins></div>
-												<div class="product-rating">
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star-half-full"></i>
-													<i class="icon-star-empty"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
-										<div class="grid-inner">
-											<div class="product-image">
-												<a href="#"><img src="images/shop/sunglasses/2.jpg" alt="Men Aviator Sunglasses"></a>
-												<a href="#"><img src="images/shop/sunglasses/2-1.jpg" alt="Men Aviator Sunglasses"></a>
-												<div class="bg-overlay">
-													<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-														<a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-														<a href="include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-													</div>
-													<div class="bg-overlay-bg bg-transparent"></div>
-												</div>
-											</div>
-											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">Men Aviator Sunglasses</a></h3></div>
-												<div class="product-price">$13.49</div>
-												<div class="product-rating">
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star-empty"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
-										<div class="grid-inner">
-											<div class="product-image">
-												<a href="#"><img src="images/shop/tshirts/4.jpg" alt="Black Polo Tshirt"></a>
-												<a href="#"><img src="images/shop/tshirts/4-1.jpg" alt="Black Polo Tshirt"></a>
-												<div class="bg-overlay">
-													<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-														<a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-														<a href="include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-													</div>
-													<div class="bg-overlay-bg bg-transparent"></div>
-												</div>
-											</div>
-											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">Black Polo Tshirt</a></h3></div>
-												<div class="product-price">$11.49</div>
-												<div class="product-rating">
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-													<i class="icon-star3"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</div>
-
-							</div>
-
 						</div>
 
 					</div>
@@ -334,23 +93,42 @@
 								<img src="images/services/4.jpg" alt="Image" class="mb-0">
 							</div>
 
-							<div class="col-md-6 mb-5 subscribe-widget">
-								<div class="heading-block">
-									<h3><strong>GET 20% OFF*</strong></h3>
-									<span>Our App scales beautifully to different Devices.</span>
-								</div>
+							<div class="col-md-5">
+							<div id="job-apply" class="heading-block highlight-me">
+								<h2>Apply Now</h2>
+								<span>And we'll get back to you within 48 hours.</span>
+							</div>
 
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias.</p>
+							<div class="form-widget">
+								<div class="form-result"></div>
 
-								<div class="widget-subscribe-form-result"></div>
-								<form id="widget-subscribe-form3" action="include/subscribe.php" method="post" class="mb-0">
-									<div class="input-group" style="max-width:400px;">
-										<div class="input-group-text"><i class="icon-email2"></i></div>
-										<input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
-										<button class="btn btn-danger" type="submit">Subscribe Now</button>
+								<form action="include/form.php" id="template-jobform" name="template-jobform" class="row mb-0" method="post">
+
+									<div class="form-process">
+										<div class="css3-spinner">
+											<div class="css3-spinner-scaler"></div>
+										</div>
 									</div>
+
+									<div class="col-12 form-group">
+										<label for="template-jobform-application">Application <small>*</small></label>
+										<textarea name="template-jobform-application" id="template-jobform-application" rows="6" tabindex="11" class="sm-form-control required"></textarea>
+									</div>
+
+									<div class="col-12 form-group d-none">
+										<input type="text" id="template-jobform-botcheck" name="template-jobform-botcheck" value="" class="sm-form-control" />
+									</div>
+
+									<div class="col-12 form-group">
+										<button class="button button-3d button-large w-100 m-0" name="template-jobform-apply" type="submit" value="apply">Send Application</button>
+									</div>
+
+									<input type="hidden" name="prefix" value="template-jobform-">
+
 								</form>
 							</div>
+
+						</div>
 						</div>
 
 					</div>

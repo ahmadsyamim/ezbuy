@@ -73,25 +73,9 @@
 							<div class="col-md-6 d-none d-md-flex align-self-end">
 								<img src="images/services/4.jpg" alt="Image" class="mb-0">
 							</div>
-
-							<div class="col-md-6 mb-5 subscribe-widget">
-								<div class="">
-									<h3><strong>ENTER YOUR LINK HERE</strong></h3>
-									{{-- <span>Our App scales beautifully to different Devices.</span> --}}
-								</div>
-
-								{{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias.</p> --}}
-
 								
-								@livewire('product-add')
-                                {{-- <div class="input-group" style="max-width:400px;">
-                                    <div class="input-group-text"><i class="icon-calculator1"></i></div>
-                                    <input type="text" name="link" class="form-control required" placeholder="Enter your product link">
-                                    <button class="btn btn-danger" type="submit">Get Total Price</button>
-                                </div> --}}
-								{{-- <form id="widget-subscribe-form3" action="include/subscribe.php" method="post" class="mb-0">
-								</form> --}}
-							</div>
+							@livewire('product-add')
+
 						</div>
 
 					</div>

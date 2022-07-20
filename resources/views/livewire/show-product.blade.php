@@ -1,4 +1,4 @@
-<div>
+
 {{-- <button wire:click="$emit('refreshComponent')"> --}}
 @push('scripts')
 <script>
@@ -49,51 +49,64 @@
     });
 </script>
 @endpush
-<div class="row pricing col-mb-30 mb-4 d-flex justify-content-center">
-    <div class="col-md-12 col-lg-12">
-        <div class="pricing-box pricing-simple px-5 py-4 bg-light text-center text-md-start">
-            @if (!$data->title)
-                <div class="pricing-title">
-                    <div class="ui active inverted dimmer">
-                        <div class="ui text loader">Loading</div>
-                    </div>
-                </div>
-            @else
-                <div class="pricing-title">
-                    {{-- <span class="text-danger">Most Popular</span> --}}
-                    <h3>{{$data->title}}</h3>
-                    @if ($data->image)
-                    <img class="ui small image" src="{{$data->image}}">
-                    @endif
-                </div>
-                <div class="pricing-price">
-                    {{-- <span class="price-unit">€</span> --}}
-                    {{money($data->sellprice, 'MYR')}}
-                </div>
-                <div class="pricing-features">
-                    <ul class="iconlist">
-                        {{-- <li><i class="icon-check text-smaller"></i> <strong>Premium</strong> Plugins</li> --}}
-                        {{-- <li><i class="icon-check text-smaller"></i> <strong>SEO</strong> Features</li> --}}
-                        <li><i class="icon-check text-smaller"></i> <strong>Full</strong> Access</li>
-                        {{-- <li><i class="icon-check text-smaller"></i> <strong>100</strong> User Accounts</li> --}}
-                        {{-- <li><i class="icon-check text-smaller"></i> <strong>1 Year</strong> License</li> --}}
-                        {{-- <li><i class="icon-check text-smaller"></i> <strong>24/7</strong> Support</li> --}}
-                    </ul>
-                </div>
-                @auth
-                <div class="pricing-action d-flex justify-content-center"">
-                    <div wire:click="createbill" wire:loading.class="loading" class="ui red button large">pay Here</div>
-                </div>
-                @else
-                <div class="pricing-action d-flex justify-content-center"">
-                <a href="{{route('login', ['intended' => route('ezbuy.item', ['id' => $data->id]) ])}}" class="btn btn-danger btn-lg">Login</a>
-                </div>
-                <div class="pricing-action d-flex justify-content-center"">
-                <a href="{{route('register')}}" class="btn btn-danger btn-lg">Register</a>
-                </div>
-                @endauth
-            @endif
-        </div>
+
+
+@if (!$data->title)
+
+<div class="pricing-title">
+    <div class="ui active inverted dimmer">
+        <div class="ui text loader">Loading</div>
     </div>
 </div>
+
+@else
+
+<div class="form-widget">
+    <div class="form-result"></div>
+
+    <form action="include/form.php" id="template-jobform" name="template-jobform" class="row mb-0" method="post">
+
+        <div class="form-process">
+            <div class="css3-spinner">
+                <div class="css3-spinner-scaler"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <div class="product-image">
+                @if ($data->image)
+                <a href="{{$data->image}}"><img src="{{$data->image}}" style="max-height:152px; object-fit:contain;" alt=""></a>
+                @endif
+            </div>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <div style="padding: 2rem 0;">
+                <ul class="iconlist" style="justify-content: center; display: grid;">
+                    <li><i class="icon-line-box"></i> <strong>MYR</strong> &nbsp;{{$data->sellprice * config('app.rate') }}</li>
+                    <li><i class="icon-shipping-fast"></i> <strong>MYR</strong> &nbsp;{{$data->shippingfee}}</li>
+                    <li><i class="icon-coffee1"></i> <strong>MYR</strong> &nbsp;{{$data->servicefee}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col-12 form-group">
+            <label for="template-jobform-email">Total <small>(All Included)</small></label>
+            <h2>MYR &nbsp;{{ ($data->sellprice * config('app.rate')) + $data->shippingfee + $data->servicefee }}</h2>
+        </div>
+
+        @auth
+        <div class="col-12 form-group">
+            <button class="ui blue button btn-add-product" wire:click="createbill" wire:loading.class="loading">Buy for me</button>
+        </div>
+        @else
+        <p>Please <a href="{{route('login', ['intended' => route('ezbuy.item', ['id' => $data->id]) ])}}">Login</a>/<a href="{{route('register')}}">Register</a> to buy.</p>
+        @endauth
+        <input type="hidden" name="prefix" value="template-jobform-">
+
+    </form>
 </div>
+
+@endif
