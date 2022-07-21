@@ -38,6 +38,9 @@ class ShowProduct extends Component
         //product link => link barang   
         $amount = ($this->data->sellprice * config('app.rate')) + $this->data->shippingfee + $this->data->servicefee;
         $amount = $amount*100;
+        if(env('TEST_PAYMENT',false)) {
+            $amount = env('TEST_PAYMENT_AMOUNT',200);
+        }
 
         if ($this->data->paymentlink) {
             return redirect($this->data->paymentlink);
