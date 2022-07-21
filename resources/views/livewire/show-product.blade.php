@@ -64,8 +64,6 @@
 <div class="form-widget">
     <div class="form-result"></div>
 
-    <form action="include/form.php" id="template-jobform" name="template-jobform" class="row mb-0" method="post">
-
         <div class="form-process">
             <div class="css3-spinner">
                 <div class="css3-spinner-scaler"></div>
@@ -104,9 +102,6 @@
         @else
         <p>Please <a href="{{route('login', ['intended' => route('ezbuy.item', ['id' => $data->id]) ])}}">Login</a>/<a href="{{route('register')}}">Register</a> to buy.</p>
         @endauth
-        <input type="hidden" name="prefix" value="template-jobform-">
-
-    </form>
 </div>
 
 @endif
