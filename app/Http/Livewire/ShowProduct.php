@@ -59,7 +59,7 @@ class ShowProduct extends Component
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         // https://republicproxy.com/webhook/&redirect_url=https://republicproxy.com/paycheck/";
-        $data = "collection_id=osjbraql&description=Show Price is Total Price include Item Price , Shipping and Our Sevices Fee.&email=".$email."&mobile=".$mobile."&name=".$name."&amount=".$amount."&reference_1_label=Link&reference_1=".$link."&callback_url=".url('/webhook/&redirect_url='.url()->route('payment.check'));
+        $data = "collection_id=osjbraql&description=Show Price is Total Price include Item Price , Shipping and Our Sevices Fee.&email=".$email."&mobile=".$mobile."&name=".$name."&amount=".$amount."&reference_1_label=Link&reference_1=".$link."&callback_url=".url('/webhook/&redirect_url='.url()->route('payment.paycheck'));
 
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
