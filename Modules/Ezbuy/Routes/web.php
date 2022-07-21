@@ -25,6 +25,7 @@ Route::prefix('api')->group(function() {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/watchlist', 'EzbuyController@watchlist');
-    Route::get('/orderlist', 'EzbuyController@orderlist');
+    Route::get('/watchlist', 'EzbuyController@watchlist')->name('watchlist');
+    Route::get('/orderlist', 'EzbuyController@orderlist')->name('orderlist');
 });
+Route::get('/paycheck', '\App\Http\Controllers\BillplzController@paycheck')->name('payment.paycheck');
