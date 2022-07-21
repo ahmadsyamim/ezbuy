@@ -43,6 +43,7 @@ class BillplzController extends Controller
             // Check payment if $paid == true, check for billplz_id
             $product = Buyforme::where('billid',$data['id'])->first();
             $product->status = 2;
+            $product->save();
             //paid_at
             //x_signature
 
