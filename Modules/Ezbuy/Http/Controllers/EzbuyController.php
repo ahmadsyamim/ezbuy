@@ -19,7 +19,7 @@ class EzbuyController extends Controller
     public function orderlist()
     {
         $limit=10;
-        $lists = Buyforme::where('user',1)->whereIn('status',[0,1])->paginate($limit);
+        $lists = Buyforme::where('user',1)->whereIn('status',[0,1])->orderBy('id')->paginate($limit);
         $ttlpage = (ceil($lists->total() / $limit));
 
 
@@ -29,7 +29,7 @@ class EzbuyController extends Controller
     public function watchlist()
     {   
         $limit=8;
-        $lists = Buyforme::where('user',1)->whereIn('status',[0,1])->paginate($limit);
+        $lists = Buyforme::where('user',auth()->user()->id)->whereIn('status',[0,1])->orderByDesc('id')->paginate($limit);
         $ttlpage = (ceil($lists->total() / $limit));
 
         return view('ezbuy::watchlist',compact('lists','ttlpage'));

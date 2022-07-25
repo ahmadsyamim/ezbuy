@@ -151,6 +151,8 @@
 			</div>
 		</section><!-- #content end -->
 
+		<div id="notification-pop" data-notify-position="top-center" data-notify-type="success" data-notify-msg="<i class='icon-ok-sign me-1'></i> Message Sent Successfully!"></div>
+
 <div class="ui inverted dimmer mainDimmer">
     <div class="ui text loader">Loading</div>
 </div>
@@ -160,5 +162,33 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
+
+<script type="text/javascript">
+	jQuery(window).on( 'load', function(){
+		notisuccess("payment successful");
+	});
+</script>
+
+<script type="text/javascript">
+	function notisuccess($msg) {
+		$("#notification-pop").attr("data-notify-type","success");
+		$("#notification-pop").attr("data-notify-msg","<i class='icon-ok-sign me-1'></i> "+$msg);
+		SEMICOLON.widget.notifications({ el: jQuery("#notification-pop") });
+	}
+
+	function notierror($msg) {
+		$("#notification-pop").attr("data-notify-type","error");
+		$("#notification-pop").attr("data-notify-msg","<i class='icon-remove-sign me-1'></i> "+$msg);
+		SEMICOLON.widget.notifications({ el: jQuery("#notification-pop") });
+	}
+
+	function notiinfo($msg) {
+		$("#notification-pop").attr("data-notify-type","info");
+		$("#notification-pop").attr("data-notify-msg","<i class='icon-info-sign me-1'></i></i> "+$msg);
+		SEMICOLON.widget.notifications({ el: jQuery("#notification-pop") });
+	}
+
+</script>
+
 @endpush
 @endsection

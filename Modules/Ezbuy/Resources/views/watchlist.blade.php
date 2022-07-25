@@ -28,9 +28,12 @@
 		<section id="content">
 			<div class="">
 				<div class="container clearfix">
-
+					
 					<div class="tabs topmargin-lg clearfix" id="tab-3">
 
+					@if( count($lists) < 1 )
+					<p class="text-center">You have 0 watchlist. Try once!</p class="text-center">
+					@else 
 						<ul class="tab-nav clearfix">
 							<li><a href="#tabs-9">Watchlist</a></li>
 							<!-- <li><a href="#tabs-10">Best sellers</a></li>
@@ -45,7 +48,7 @@
 									@foreach( $lists as $key => $list )
 									<div class="product col-lg-3 col-md-4 col-sm-6 col-12">
 										<div class="grid-inner">
-											<div class="product-image" style="max-height:300px;">
+											<div class="product-image" style="max-height:300px; width:300px;">
 												<a href="#"><img src="{{ $list->image }}" alt="{{ $list->title }}"></a>
 												<a href="#"><img src="{{ $list->image }}" alt="{{ $list->title }}"></a>
 												<div class="sale-flash badge bg-success p-2">50% Off*</div>
@@ -80,7 +83,7 @@
 							</div>
 
 						</div>
-
+					@endif
 					</div>
 
 				</div>
@@ -93,40 +96,7 @@
 								<img src="images/services/4.jpg" alt="Image" class="mb-0">
 							</div>
 
-							<div class="col-md-5">
-							<div id="job-apply" class="heading-block highlight-me">
-								<h2>Apply Now</h2>
-								<span>And we'll get back to you within 48 hours.</span>
-							</div>
-
-							<div class="form-widget">
-								<div class="form-result"></div>
-
-								<form action="include/form.php" id="template-jobform" name="template-jobform" class="row mb-0" method="post">
-
-									<div class="form-process">
-										<div class="css3-spinner">
-											<div class="css3-spinner-scaler"></div>
-										</div>
-									</div>
-
-									<div class="col-12 form-group">
-										<label for="template-jobform-application">Application <small>*</small></label>
-										<textarea name="template-jobform-application" id="template-jobform-application" rows="6" tabindex="11" class="sm-form-control required"></textarea>
-									</div>
-
-									<div class="col-12 form-group d-none">
-										<input type="text" id="template-jobform-botcheck" name="template-jobform-botcheck" value="" class="sm-form-control" />
-									</div>
-
-									<div class="col-12 form-group">
-										<button class="button button-3d button-large w-100 m-0" name="template-jobform-apply" type="submit" value="apply">Send Application</button>
-									</div>
-
-									<input type="hidden" name="prefix" value="template-jobform-">
-
-								</form>
-							</div>
+							@livewire('product-add')
 
 						</div>
 						</div>
