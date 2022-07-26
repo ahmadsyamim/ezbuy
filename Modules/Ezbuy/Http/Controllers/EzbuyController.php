@@ -16,6 +16,18 @@ class EzbuyController extends Controller
      * @return Renderable
      */
 
+    //Store image
+    public function storeImage(Request $request){
+
+        if($request->file('image')){
+            $file= $request->file('image');
+            // $filename= date('YmdHi').$file->getClientOriginalName();
+            $filename= $file->getClientOriginalName();
+            $file-> move(public_path('images'), $filename);
+        }
+    
+    }
+
     public function orderlist()
     {
         $limit=10;

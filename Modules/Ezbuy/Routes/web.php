@@ -12,6 +12,8 @@
 */
 // dd(Request::path());
 Route::get('/', 'EzbuyController@index')->name('/');
+Route::post('/muatnaikgambar', 'EzbuyController@storeImage');
+
 Route::prefix('ezbuy')->group(function() {
     Route::get('/', 'EzbuyController@index');
     Route::get('/create', 'EzbuyController@create');
