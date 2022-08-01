@@ -94,7 +94,14 @@ class EzbuyController extends Controller
     {
         $data = Buyforme::find($id);
         if (!$data) { return redirect()->url('/'); }
-        return view('ezbuy::show', compact('data'));
+        $data->user = auth()->user()->id;
+        $data->save();
+
+        $limit=4;
+        $lists = Buyforme::where('user',auth()->user()->id)->whereIn('status',[0,1])->orderByDesc('id')->paginate($limit);
+        $ttlpage = (ceil($lists->total() / $limit));
+
+        return view('ezbuy::show', compact('data','lists','ttlpage'));
     }
 
     /**

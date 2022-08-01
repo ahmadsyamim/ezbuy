@@ -57,13 +57,13 @@
 											<div class="entry-title title-sm">
 												<h2><a href="blog-single.html">{{Str::limit($list->title, 33, $end='..')}}</a></h2>
 											</div>
-											<!-- <div class="entry-meta">
+											<div class="entry-meta">
 												<ul>
-													<li><i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star-half-full color"></i></li>
-													<li><i class="icon-line-map"></i><a href="https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom" data-lightbox="iframe"> Nusa Dua</a></li>
-													<li><i class="icon-star3"></i><a href="#"> 24</a></li>
+													<!-- <li><i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star-half-full color"></i></li> -->
+													<!-- <li><i class="icon-line-map"></i><a href="https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom" data-lightbox="iframe"> Nusa Dua</a></li> -->
+													<li><i class="icon-clock"></i>2022/12/12 15:45 </li>
 												</ul>
-											</div> -->
+											</div>
 											<div class="entry-content">
 												<div class="clearfix" style="margin-bottom: 10px;">
 													<i class="i-rounded i-small i-bordered icon-credit-cards"  data-bs-toggle="tooltip" data-bs-placement="top" title="Paid"></i>
@@ -151,9 +151,8 @@
 			</div>
 		</section><!-- #content end -->
 
-		<div id="notification-pop" data-notify-position="top-center" data-notify-type="success" data-notify-msg="<i class='icon-ok-sign me-1'></i> Message Sent Successfully!"></div>
-
-<div class="ui inverted dimmer mainDimmer">
+		
+		<div class="ui inverted dimmer mainDimmer">
     <div class="ui text loader">Loading</div>
 </div>
 @push('styles')
@@ -169,26 +168,7 @@
 	});
 </script>
 
-<script type="text/javascript">
-	function notisuccess($msg) {
-		$("#notification-pop").attr("data-notify-type","success");
-		$("#notification-pop").attr("data-notify-msg","<i class='icon-ok-sign me-1'></i> "+$msg);
-		SEMICOLON.widget.notifications({ el: jQuery("#notification-pop") });
-	}
-
-	function notierror($msg) {
-		$("#notification-pop").attr("data-notify-type","error");
-		$("#notification-pop").attr("data-notify-msg","<i class='icon-remove-sign me-1'></i> "+$msg);
-		SEMICOLON.widget.notifications({ el: jQuery("#notification-pop") });
-	}
-
-	function notiinfo($msg) {
-		$("#notification-pop").attr("data-notify-type","info");
-		$("#notification-pop").attr("data-notify-msg","<i class='icon-info-sign me-1'></i></i> "+$msg);
-		SEMICOLON.widget.notifications({ el: jQuery("#notification-pop") });
-	}
-
-</script>
+@include('ezbuy::layouts.notification')
 
 @endpush
 @endsection

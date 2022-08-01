@@ -29,8 +29,8 @@ class ShowProduct extends Component
         $user = auth()->user();
         $email = $user->email;
         $name = $user->name;
-        $mobile = $user->phone_number;
-        $link = route('ezbuy.item', ['id' => $this->data->id]);
+        // $mobile = $user->phone_number;  // validate phone number as Google libphonenumber library first  //https://www.billplz.com/api#v3-bills-create-a-bill
+        $link = $this->data->producturl ?? route('ezbuy.item', ['id' => $this->data->id]);
         //email => email customer
         //mobile =? no tel customer 
         //name => nama customer 
@@ -59,7 +59,8 @@ class ShowProduct extends Component
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         // https://republicproxy.com/webhook/&redirect_url=https://republicproxy.com/paycheck/";
-        $data = "collection_id=osjbraql&description=Show Price is Total Price include Item Price , Shipping and Our Sevices Fee.&email=".$email."&mobile=".$mobile."&name=".$name."&amount=".$amount."&reference_1_label=Link&reference_1=".$link."&callback_url=".url('/webhook/&redirect_url='.url()->route('payment.paycheck'));
+        // $data = "collection_id=osjbraql&description=Show Price is Total Price include Item Price , Shipping and Our Sevices Fee.&email=".$email."&mobile=".$mobile."&name=".$name."&amount=".$amount."&reference_1_label=Link&reference_1=".$link."&callback_url=".url('/webhook/&redirect_url='.url()->route('payment.paycheck'));
+        $data = "collection_id=osjbraql&description=Show Price is Total Price include Item Price , Shipping and Our Sevices Fee.&email=".$email."&mobile=".$name."&amount=".$amount."&reference_1_label=Item&reference_1=".$link."&callback_url=".url('/webhook/&redirect_url='.url()->route('payment.paycheck'));
 
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 

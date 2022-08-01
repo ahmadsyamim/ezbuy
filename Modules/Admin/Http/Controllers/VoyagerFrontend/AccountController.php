@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends BaseController
 {
@@ -21,8 +22,18 @@ class AccountController extends BaseController
         $user = Auth::user();
 
         $rules = [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            // ^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$ /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
+            // 'name' => 'required|string|max:255',
+            'phone_number' => 'required|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/|min:10',
+            // 'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+
+            'saname' => 'required|string|max:255',
+            'saphone_number' => 'required|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/|min:10',
+            'saaddress1' => 'required|string|max:255',
+            'sapostcode' => 'required|numeric|min:5',
+            'sacity' => 'required|string|max:255',
+            'sastate' => 'required|string|max:255',
+
         ];
 
         if ($data['password'] !== null) {
@@ -41,7 +52,11 @@ class AccountController extends BaseController
     {
         $user = Auth::user();
 
-        return view('voyager-frontend::modules/auth/account', ['user' => $user]);
+        $sa = DB::table('address')->where('userid',Auth::user()->id)->first();
+
+        // dd($sa->name);
+
+        return view('voyager-frontend::modules/auth/account', compact('user','sa'));
     }
 
     /**
@@ -54,10 +69,11 @@ class AccountController extends BaseController
     public function updateAccount(Request $request)
     {
         $this->validator($request->all())->validate();
-
+        // print_r($request->saname);
+        // dd($request->all());
         $user = Auth::user();
-        $user->name = $request->input('name');
-        //$user->email = $request->input('email');
+        // $user->name = $request->input('name');
+        $user->phone_number = $request->input('phone_number');
 
         if ($request->input('password') !== null) {
             $user->password = bcrypt($request->input('password'));
@@ -65,6 +81,22 @@ class AccountController extends BaseController
         }
 
         $user->save();
+
+        DB::table('address')
+        ->where('id', $request->said)
+        ->update(
+            [
+                'name' => $request->saname,
+                'phone_number' => $request->saphone_number,
+                'address1' => $request->saaddress1,
+                'address2' => $request->saaddress2,
+                'postcode' => $request->sapostcode,
+                'city' => $request->sacity,
+                'state' => $request->sastate,
+                'userid' => $user->id,
+            ]
+        );
+
 
         return redirect()
             ->route('voyager-frontend.account')
