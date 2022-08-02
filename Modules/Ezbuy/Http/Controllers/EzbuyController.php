@@ -15,6 +15,10 @@ class EzbuyController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
+    public function contactus()
+    {
+        return view('ezbuy::contactus');
+    }
 
     //Store image
     public function storeImage(Request $request){
