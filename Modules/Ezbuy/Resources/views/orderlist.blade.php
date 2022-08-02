@@ -40,9 +40,14 @@
 				<div class="container clearfix">
 
 					<div class="row gutter-40 col-mb-80">
+
+						
 						<!-- Post Content
 						============================================= -->
 						<div class="postcontent col-lg-9 order-lg-last">
+							@if( count($lists) < 1 )
+							<p class="text-center">You have 0 Order. Try once!</p class="text-center">
+							@else
 							<!-- Posts
 							============================================= -->
 							<div id="posts" class="row gutter-40 mb-0">
@@ -59,29 +64,42 @@
 											</div>
 											<div class="entry-meta">
 												<ul>
-													<!-- <li><i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star-half-full color"></i></li> -->
-													<!-- <li><i class="icon-line-map"></i><a href="https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom" data-lightbox="iframe"> Nusa Dua</a></li> -->
 													<li><i class="icon-clock"></i>2022/12/12 15:45 </li>
+													@if(in_array($list->status,['3','7','8','9']))
+													<li><a data-href="https://republicproxy.my/images/1658853933019httpsjpmercaricomitemm22033001496.png" data-lightbox="iframe" class="newtab"><i class="icon-image"></i> Screenshot</a></li>
+													@endif
+													<!-- <li><i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star3 color"></i> <i class="icon-star-half-full color"></i></li> -->
 												</ul>
 											</div>
 											<div class="entry-content">
 												<div class="clearfix" style="margin-bottom: 10px;">
+													@if(in_array($list->status,['2','3','7','8','9']))
 													<i class="i-rounded i-small i-bordered icon-credit-cards"  data-bs-toggle="tooltip" data-bs-placement="top" title="Paid"></i>
+													@endif
+													@if(in_array($list->status,['3','7','8','9']))
+													<i class="i-rounded i-small i-bordered icon-line-shopping-bag"  data-bs-toggle="tooltip" data-bs-placement="top" title="Bought"></i>
+													@endif
+													@if(in_array($list->status,['7','8','9']))
 													<i class="i-rounded i-small i-bordered icon-line-log-in"  data-bs-toggle="tooltip" data-bs-placement="top" title="received"></i>
-													<i class="i-rounded i-small i-bordered border-0 i-light icon-plane-departure"  data-bs-toggle="tooltip" data-bs-placement="depart from" title="ship-out from country"></i>
-													<i class="i-rounded i-small i-bordered icon-plane-arrival"  data-bs-toggle="tooltip" data-bs-placement="top" title="arrive at country"></i>
-													<i class="i-rounded i-small i-bordered icon-line-log-out"  data-bs-toggle="tooltip" data-bs-placement="top" title="Ship locally"></i>
-													<i class="i-rounded i-small i-bordered border-0 i-light icon-check"  data-bs-toggle="tooltip" data-bs-placement="top" title="Complete"></i>
+													@endif
+													@if(in_array($list->status,['8','9']))
+													<i class="i-rounded i-small i-bordered icon-plane-departure"  data-bs-toggle="tooltip" data-bs-placement="depart from" title="ship-out from country"></i>
+													@endif
+													@if(in_array($list->status,['9']))
+													<i class="i-rounded i-small i-bordered icon-check"  data-bs-toggle="tooltip" data-bs-placement="top" title="Complete"></i>
+													@endif
+													<!-- <i class="i-rounded i-small i-bordered icon-plane-arrival"  data-bs-toggle="tooltip" data-bs-placement="top" title="arrive at country"></i> -->
+													<!-- <i class="i-rounded i-small i-bordered icon-line-log-out"  data-bs-toggle="tooltip" data-bs-placement="top" title="Ship locally"></i> -->
 												</div>
 												<p class="mb-0">{{ $list->producturl }}</p>
 											</div>
 										</div>
 										<div class="col-lg-auto col-md-4 mt-4 mt-lg-0 text-start text-md-center">
 											<div class="hotel-price">
-												<b>MYR</b> 49.99
+												<b>MYR</b> 49.99 {{ $list->id }} {{ $list->status }}
 											</div>
 											<small><em>Total Price</em></small><br>
-											<a href="#"class="button button-rounded mt-4 mx-0">RECEIPT</a>
+											<a data-href="{{ $list->paymentlink }}" class="button button-rounded mt-4 mx-0 newtab"><i class="icon-file-invoice-dollar"></i>REFUND</a>
 										</div>
 									</div>
 								</div>
@@ -90,6 +108,8 @@
 							</div>
 
 							@include('ezbuy::layouts.paging')
+
+							@endif
 
 						</div>
 
@@ -166,6 +186,15 @@
 	jQuery(window).on( 'load', function(){
 		notisuccess("payment successful");
 	});
+
+    $("a.newtab").click(function( event ) {
+		event.preventDefault();
+		var href = $(this).attr('data-href');
+		// alert(href);
+		window.open(href, "_blank",);
+
+    });
+
 </script>
 
 @include('ezbuy::layouts.notification')

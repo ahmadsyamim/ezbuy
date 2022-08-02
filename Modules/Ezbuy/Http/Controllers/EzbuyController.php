@@ -31,7 +31,7 @@ class EzbuyController extends Controller
     public function orderlist()
     {
         $limit=10;
-        $lists = Buyforme::where('user',1)->whereIn('status',[0,1])->orderBy('id')->paginate($limit);
+        $lists = Buyforme::where('user',auth()->user()->id)->orderByDesc('id')->paginate($limit);
         $ttlpage = (ceil($lists->total() / $limit));
 
 
