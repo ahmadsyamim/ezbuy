@@ -64,7 +64,7 @@
 											</div>
 											<div class="entry-meta">
 												<ul>
-													<li><i class="icon-clock"></i>2022/12/12 15:45 </li>
+													<li><i class="icon-clock"></i>{{ date("Y-m-d H:i", strtotime($list->paid_at)) }} </li>
 													@if(in_array($list->status,['3','7','8','9']))
 													<li><a data-href="https://republicproxy.my/images/1658853933019httpsjpmercaricomitemm22033001496.png" data-lightbox="iframe" class="newtab"><i class="icon-image"></i> Screenshot</a></li>
 													@endif
