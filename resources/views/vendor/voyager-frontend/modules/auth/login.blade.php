@@ -47,7 +47,7 @@
 					<div class="vertical-middle">
 						<div class="container-fluid py-5 mx-auto">
 							<div class="center">
-								<a href="index.html"><img src="images/logo-dark.png" alt="Canvas Logo"></a>
+								<a href="{{ url('/') }}"><img src="images/logo-dark.png" alt="Canvas Logo"></a>
 							</div>
 
 							<div class="card mx-auto rounded-0 border-0" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">
@@ -57,6 +57,8 @@
 										<h3>Login to your Account</h3>
 
 										<div class="row">
+										    <span class="text-danger">{{ $error ?? '' }}</span>
+
 											<div class="col-12 form-group">
 												<label for="email">Email:</label>
 												<input type="email" id="email" name="email" value="{{ old('email') }}"class="form-control not-dark" aria-describedby="emailHelpText" required autofocus/>

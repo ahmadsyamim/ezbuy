@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Session;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -32,6 +34,16 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+
+    protected function authenticated($request, $user){
+
+        if(!$user->email_verified_at){
+            // Session::flush();
+            Auth::logout();
+            return view('voyager-frontend::auth.login')->with('error',"Please verify your email !");
+        }
+    }
 
     /**
      * Create a new controller instance.

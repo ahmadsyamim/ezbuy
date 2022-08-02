@@ -285,10 +285,6 @@
 		"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
 	});
 
-	console.log(saphoneInput);
-
-	alert('2121');
-
 	function getIp(callback) {
 		fetch('https://ipinfo.io/json?token=4ea90b6207ed28', { headers: { 'Accept': 'application/json' }})
 		.then((resp) => resp.json())
