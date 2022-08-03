@@ -40,8 +40,9 @@ class LoginController extends Controller
 
         if(!$user->email_verified_at){
             // Session::flush();
+            // #fixlater , no need logout , add verified in middleware
             Auth::logout();
-            return view('voyager-frontend::auth.login')->with('error',"Please verify your email !");
+            return redirect('/login')->with('error',"Please verify your email !");
         }
     }
 

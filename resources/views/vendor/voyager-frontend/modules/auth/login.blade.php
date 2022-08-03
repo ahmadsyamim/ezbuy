@@ -20,7 +20,7 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>Login - Layout 5 | Canvas</title>
+	<title>{{ env('APP.NAME') }}</title>
 
 </head>
 
@@ -57,8 +57,9 @@
 										<h3>Login to your Account</h3>
 
 										<div class="row">
-										    <span class="text-danger">{{ $error ?? '' }}</span>
-
+											@if (session('error'))
+												<span class="text-danger">{{ session('error') }}</span>
+											@endif
 											<div class="col-12 form-group">
 												<label for="email">Email:</label>
 												<input type="email" id="email" name="email" value="{{ old('email') }}"class="form-control not-dark" aria-describedby="emailHelpText" required autofocus/>
