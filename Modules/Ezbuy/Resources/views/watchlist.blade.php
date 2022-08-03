@@ -113,14 +113,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
 
-@if (session('success'))
-<script type="text/javascript">
-	jQuery(window).on( 'load', function(){
-		notisuccess("{{ session('success') }}");
-	});
-</script>
-@endif
-
 @include('ezbuy::layouts.notification')
 
 @endpush

@@ -38,6 +38,15 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="{{ url('/') }}/js/frontend.js"></script>
     <script src="{{ url('/') }}/js/functions.js"></script>
+    <script type="text/javascript">
+        $("a.newtab").click(function( event ) {
+            event.preventDefault();
+            var href = $(this).attr('data-href');
+            // alert(href);
+            window.open(href, "_blank",);
+        });
+    </script>
+
     @stack('scripts')
 </body>
 </html>

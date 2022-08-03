@@ -44,6 +44,11 @@ class LoginController extends Controller
             Auth::logout();
             return redirect('/login')->with('error',"Please verify your email !");
         }
+
+        if($user->role_id == '1'){
+            return redirect('/allorderlist')->with('info',"You are login as Admin !");
+        }
+
     }
 
     /**

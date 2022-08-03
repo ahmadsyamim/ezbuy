@@ -44,7 +44,7 @@
 					</div>
 
 					<ul class="clients-grid grid-2 grid-sm-3 grid-md-6 mb-0">
-						<li class="grid-item"><a href="#"><img src="{{url("images/clients/mercari.png")}}" alt="Clients"></a></li>
+						<li class="grid-item"><a data-href="https://jp.mercari.com/" class="newtab zoom-in"><img src="{{url("images/clients/mercari.png")}}" alt="Clients"></a></li>
 						<li class="grid-item"><a href="#"><img src="{{url("images/clients/yahoo-cs.png")}}" alt="Clients"></a></li>
 						<li class="grid-item"><a href="#"><img src="{{url("images/clients/snkrdunk-cs.jpg")}}" alt="Clients"></a></li>
 						<li class="grid-item"><a href="#"><img src="{{url("images/clients/lecreuset-cs.jpg")}}" alt="Clients"></a></li>

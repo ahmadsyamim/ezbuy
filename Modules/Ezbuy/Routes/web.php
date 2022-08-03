@@ -14,6 +14,7 @@
 Route::get('/', 'EzbuyController@index')->name('/');
 Route::get('/contactus', 'EzbuyController@contactus')->name('/contactus');
 Route::post('/muatnaikgambar', 'EzbuyController@storeImage');
+Route::post('/refundupdate', 'EzbuyController@refundupdate')->name('refundupdate');
 
 Route::prefix('ezbuy')->group(function() {
     Route::get('/', 'EzbuyController@index');
@@ -32,3 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orderlist', 'EzbuyController@orderlist')->name('orderlist');
 });
 Route::get('/paycheck', '\App\Http\Controllers\BillplzController@paycheck')->name('payment.paycheck');
+
+Route::middleware(['isAdmin'])->group(function () {
+    Route::get('/allorderlist', 'EzbuyController@allorderlist')->name('allorderlist');
+});

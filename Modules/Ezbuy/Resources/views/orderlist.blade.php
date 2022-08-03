@@ -60,7 +60,7 @@
 										</div>
 										<div class="col-lg col-md-8 mt-4 mt-lg-0">
 											<div class="entry-title title-sm">
-												<h2><a href="blog-single.html">{{Str::limit($list->title, 33, $end='..')}}</a></h2>
+												<h2><a href="blog-single.html">[{{ $list->id }}] [{{ $list->status }}] {{Str::limit($list->title, 33, $end='..')}}</a></h2>
 											</div>
 											<div class="entry-meta">
 												<ul>
@@ -73,7 +73,7 @@
 											</div>
 											<div class="entry-content">
 												<div class="clearfix" style="margin-bottom: 10px;">
-													@if(in_array($list->status,['2','3','7','8','9']))
+													@if(in_array($list->status,['2','3','7','8','9','11','12','13']))
 													<i class="i-rounded i-small i-bordered icon-credit-cards"  data-bs-toggle="tooltip" data-bs-placement="top" title="Paid"></i>
 													@endif
 													@if(in_array($list->status,['3','7','8','9']))
@@ -88,6 +88,13 @@
 													@if(in_array($list->status,['9']))
 													<i class="i-rounded i-small i-bordered icon-check"  data-bs-toggle="tooltip" data-bs-placement="top" title="Complete"></i>
 													@endif
+													@if(in_array($list->status,['11','13']))
+													<i class="i-rounded i-small i-bordered icon-line-cross"  data-bs-toggle="tooltip" data-bs-placement="depart from" title="Fail To Buy, Will Refund"></i>
+													@endif
+													@if(in_array($list->status,['13']))
+													<i class="i-rounded i-small i-bordered icon-money-check-alt"  data-bs-toggle="tooltip" data-bs-placement="top" title="Complete"></i>
+													@endif
+													
 													<!-- <i class="i-rounded i-small i-bordered icon-plane-arrival"  data-bs-toggle="tooltip" data-bs-placement="top" title="arrive at country"></i> -->
 													<!-- <i class="i-rounded i-small i-bordered icon-line-log-out"  data-bs-toggle="tooltip" data-bs-placement="top" title="Ship locally"></i> -->
 												</div>
@@ -96,10 +103,15 @@
 										</div>
 										<div class="col-lg-auto col-md-4 mt-4 mt-lg-0 text-start text-md-center">
 											<div class="hotel-price">
-												<b>MYR</b> 49.99 {{ $list->id }} {{ $list->status }}
+												<b>MYR</b> {{ ($list->sellprice * config('app.rate')) + $list->shippingfee + $list->servicefee }}
 											</div>
 											<small><em>Total Price</em></small><br>
-											<a data-href="{{ $list->paymentlink }}" class="button button-rounded mt-4 mx-0 newtab"><i class="icon-file-invoice-dollar"></i>REFUND</a>
+											@if(in_array($list->status,['2','3','7','8','9','11','12','13']))
+											<a data-href="{{ $list->paymentlink }}" class="button button-rounded mt-4 mx-0 newtab"><i class="icon-file-invoice-dollar"></i>RECEIPT</a>
+											@endif
+											@if(in_array($list->status,['11']))
+											<a data-id="{{ $list->id }}" data-bs-toggle="modal" data-bs-target="#RefundAccountModal" class="button button-rounded mt-4 mx-0 bg-danger refundbtn"><i class="icon-line-alert-circle"></i>REFUND</a>
+											@endif
 										</div>
 									</div>
 								</div>
@@ -113,6 +125,78 @@
 
 						</div>
 
+						<div class="modal fade" id="RefundAccountModal" tabindex="-1" role="dialog" aria-labelledby="RefundAccountModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title" id="RefundAccountModalLabel">Refund to This Account</h4>
+											<button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-hidden="true"></button>
+										</div>
+										<div class="modal-body">
+
+										@php $action= route('refundupdate') ; @endphp
+										<form class="mb-0" id="refundaccount" method="POST" action="{{ $action }}">
+										@csrf
+											<div class="form-widget">
+												<div class="form-result"></div>
+
+													<div class="form-process">
+														<div class="css3-spinner">
+															<div class="css3-spinner-scaler"></div>
+														</div>
+													</div>
+
+													<div class="row">
+
+														<div class="col-sm-8 form-group">
+															<label for="bank">Bank <small>*</small></label>
+															<select id="bank" name="bank" class="sm-form-control">
+															<!-- // #fixlater //bootstrap-select live search -->
+																@foreach (config('global.banklist') as $key => $value)
+																<option value="{{$key}}" >{{__($value)}}</option>
+																@endforeach
+															</select>
+															<p style="display:none" class="bank error text-danger"></p>
+														</div>
+
+														<!-- <div class="col-12 form-group">
+															<label for="template-contactform-name">Name <small>*</small></label>
+															<input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control" />
+														</div> -->
+
+														<div class="col-12 form-group">
+															<label for="accno">Acc No <small>*</small></label>
+															<input type="text" id="accno" name="accno" value="" class="sm-form-control" />
+															<p style="display:none" class="accno error text-danger"></p>
+														</div>
+
+														<div class="w-100"></div>
+
+														<div class="col-12 form-group">
+															<label for="receipname">Receipient Name <small>*</small></label>
+															<input type="text" id="receipname" name="receipname" value="" class="sm-form-control" />
+															<p style="display:none" class="receipname error text-danger"></p>
+														</div>
+
+													</div>
+
+													<input type="hidden" id="buyid" name="buyid">
+
+													
+												</div>
+												
+												
+											</div>
+											<div class="modal-footer">
+												<button class="button button-3d m-0 btn-submit" type="submit">Submit</button>
+												<!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+											</div>
+										</form>
+									</div><!-- /.modal-content -->
+								</div><!-- /.modal-dialog -->
+							</div><!-- /.modal -->
+							<!-- Modal Contact Form End -->
+
 						<!-- Sidebar
 						============================================= -->
 						<div class="sidebar col-lg-3">
@@ -121,7 +205,7 @@
 
 									<div class="ps-0 mt-15">
 
-										<form class="row mb-0">
+										<form class="row mb-0" action="{{ url()->current() }}" method="GET">
 											<div class="form-process">
 												<div class="css3-spinner">
 													<div class="css3-spinner-scaler"></div>
@@ -129,32 +213,28 @@
 											</div>
 
 											<div class="col-12 form-group">
-												<label for="template-contactform-name">NAME/URL :</label>
-												<input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control required" placeholder="Air Jordan" />
+												<label for="kword">PRODUCT NAME/URL :</label>
+												<input type="text" id="kword" name="kword" value="{{ $_GET['kword'] ?? '' }}" class="sm-form-control required" placeholder="Air Jordan" />
 											</div>
 
 											<div class="col-12">
 												<div class="input-daterange travel-date-group row mb-0">
 													<div class="col-12 form-group">
 														<label for="">Date From :</label>
-														<input type="text" value="" class="sm-form-control text-start" name="start" placeholder="mm/dd/yyyy">
+														<input type="date" value="{{ $_GET['start'] ?? '' }}" class="sm-form-control text-start" name="start" placeholder="mm/dd/yyyy">
 													</div>
 
 													<div class="col-12 form-group">
 														<label for="">Date Till :</label>
-														<input type="text" value="" class="sm-form-control text-start" name="end" placeholder="mm/dd/yyyy">
+														<input type="date" value="{{ $_GET['end'] ?? '' }}" class="sm-form-control text-start" name="end" placeholder="mm/dd/yyyy">
 													</div>
 												</div>
 											</div>
 
 											<div class="w-100"></div>
 
-											<div class="col-12 form-group d-none">
-												<input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="sm-form-control" />
-											</div>
-
 											<div class="col-12 form-group mb-0">
-												<a href="#" class="button button-3d m-0">Search</a>
+												<button class="button button-3d m-0" type="submit">SEARCH</button>
 											</div>
 										</form>
 
@@ -164,6 +244,7 @@
 
 							</div>
 
+							
 						</div>
 					</div>
 
@@ -182,22 +263,53 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
 
+@include('ezbuy::layouts.notification')
+
 <script type="text/javascript">
-	jQuery(window).on( 'load', function(){
-		notisuccess("payment successful");
+
+
+	$(".refundbtn").click(function() {
+		$("input#buyid").val($(this).attr("data-id"));
 	});
 
-    $("a.newtab").click(function( event ) {
-		event.preventDefault();
-		var href = $(this).attr('data-href');
-		// alert(href);
-		window.open(href, "_blank",);
 
-    });
+	$(".btn-submit").click(function(e) {
+		e.preventDefault();
+		var _token = $("input[name='_token']").val();
+		let formData = new FormData(refundaccount);
+		console.log(formData);
+		$.ajax({
+			url: "{{ $action }}",
+			type: 'POST',
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				if ($.isEmptyObject(data.error)) {
+					console.log('okkk :::',data.success);
+					$("form#refundaccount").submit();
+                    // alert(data.success);
+                    // location.reload();
+
+				} else {
+					// alert("err");
+					console.log(data.error);
+					$('.error').hide()
+					$.each(data.error, function(key, value) {
+						$('.error.' + key).text(value[0])
+						$('.error.' + key).show()
+					});
+				}
+			},
+			fail: function(data) {
+				alert("API fail [0001]");
+			}
+		});
+	});
 
 </script>
 
-@include('ezbuy::layouts.notification')
+
 
 @endpush
 @endsection
