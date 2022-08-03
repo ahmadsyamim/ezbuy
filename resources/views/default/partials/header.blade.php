@@ -33,12 +33,12 @@
 									</ul> 
 								</li>--}}
 								@if (Auth::guest())
-								<li class="top-links-item"><a href="{{ route('login') }}">Login</a></li>
-								<li class="top-links-item"><a href="{{ route('register') }}">Register</a></li>
+								<!-- <li class="top-links-item"><a href="{{ route('login') }}">Login</a></li>
+								<li class="top-links-item"><a href="{{ route('register') }}">Register</a></li> -->
 								@else
-									<li class="top-links-item">
+									<!-- <li class="top-links-item">
 										<a href="{{ route('voyager-frontend.account') }}">Update Account</a>
-									</li>
+									</li> -->
 									<li class="top-links-item">
 										@if (Session::has('original_user.id'))
 											<a href="#"
@@ -52,12 +52,12 @@
 												@csrf
 											</form>
 										@else
-											<a href="#" onclick="document.getElementById('logout-form').submit();return false;">
+											<!-- <a href="#" onclick="document.getElementById('logout-form').submit();return false;">
 												Logout
 											</a>
 											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 												@csrf
-											</form>
+											</form> -->
 										@endif
 									</li>
 								@endif
@@ -108,7 +108,15 @@
 							<!-- Top Search
 							============================================= -->
 							<div id="top-search" class="header-misc-icon">
-								<a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
+								@if (Auth::guest())
+								<a href="{{ url('/login') }}"><i class="icon-user-circle"></i><i class="icon-line-cross"></i></a>
+								<!-- <a href="{{ url('/login') }}" id="top-search-trigger"><i class="icon-user-circle"></i><i class="icon-line-cross"></i></a> -->
+								@else
+								<a onclick="document.getElementById('logout-form').submit();return false;"><i class="icon-sign-out-alt"></i><i class="icon-line-cross"></i></a>
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									@csrf
+								</form>
+								@endif
 							</div>
 							<!-- #top-search end -->
 
@@ -128,10 +136,11 @@
 							<ul class="menu-container">
 								@if (Auth::guest())
 								<li class="menu-item"><a class="menu-link" href="#"><div>Home</div><span>Awesome Works</span></a></li>
-								<li class="menu-item"><a class="menu-link" href="#"><div>Contact Us</div><span>Awesome Works</span></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/contactus') }}"><div>Contact Us</div><span>Awesome Works</span></a></li>
 								@else
 								<li class="menu-item"><a class="menu-link" href="{{ url('/watchlist') }}"><div>Watch List</div><span>Awesome Works</span></a></li>
 								<li class="menu-item"><a class="menu-link" href="{{ url('/orderlist') }}"><div>Order List</div><span>Awesome Works</span></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ route('voyager-frontend.account') }}"><div>Account</div><span>Awesome Works</span></a></li>
 								@endif
 							</ul>
 
