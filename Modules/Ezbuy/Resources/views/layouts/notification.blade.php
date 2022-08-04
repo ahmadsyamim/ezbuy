@@ -3,25 +3,25 @@
 
 	@if (session('success'))
 		jQuery(window).on( 'load', function(){
-			notisuccess("{{ session('success') }}");
+			notisuccess("{!! session('success') !!}");
 		});
 	@endif
 
 	@if (session('error'))
 		jQuery(window).on( 'load', function(){
-			notierror("{{ session('error') }}");
+			notierror("{!! session('error') !!}");
 		});
 	@endif
 
 	@if (session('info'))
 		jQuery(window).on( 'load', function(){
-			notiinfo("{{ session('info') }}");
+			notiinfo("{!! session('info') !!}");
 		});
 	@endif
 
 	@if (!empty(session('alert-type')))
 	jQuery(window).on( 'load', function(){
-		notisuccess("{{ session('message') }}");
+		notisuccess("{!! session('message') !!}");
 	});
 	@endif
 

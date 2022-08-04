@@ -15,6 +15,7 @@ Route::get('/', 'EzbuyController@index')->name('/');
 Route::get('/contactus', 'EzbuyController@contactus')->name('/contactus');
 Route::post('/muatnaikgambar', 'EzbuyController@storeImage');
 Route::post('/refundupdate', 'EzbuyController@refundupdate')->name('refundupdate');
+Route::post('/contactsubmit', 'EzbuyController@contactsubmit')->name('contactsubmit');
 
 Route::prefix('ezbuy')->group(function() {
     Route::get('/', 'EzbuyController@index');

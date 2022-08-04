@@ -9,13 +9,63 @@ use Modules\Ezbuy\Entities\Product;
 use App\Models\Buyforme;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Redirect;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmail;
+use App\Models\User;
 
 class EzbuyController extends Controller
+
 {
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
+
+    public function contactsubmit(Request $request)
+    {
+    
+        $valarr = array(
+            'subject' => 'required|not_in:0',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'message' => 'required|string',
+            'attachement' => 'max:3000',
+                    );
+    
+        $validator = Validator::make($request->all(), $valarr);
+    
+        if($request->ajax()){
+        
+            if ($validator->passes()) {
+                return response()->json(['success'=>true]);
+            }         
+            return response()->json(['error'=>$validator->errors()]);
+        
+        }
+        // dd($request->all());die;
+        if($request->file('attachement')){
+            $file= $request->file('attachement');
+            $filename= date('YmdHisv').$file->getClientOriginalName();
+            $file-> move(public_path('attachements'), $filename);
+
+            $attachhtml = '<a href="'.asset('attachements/'.$filename).'" target="_blank">'.$filename.'</a>';
+        }
+
+    	$user = User::first();
+        
+        $data = [
+            'subject' => 'New Contact-Us Inquiry ['.config('global.contactsubject')[$request->subject].']',
+            'greeting' => 'Hi '.$user->name.',',
+            'body' => 'From : '.$request->name.' <br>Email : '.$request->email.'<br> Phone: '.($request->phone_number??'').'<br>Attachement: '.($attachhtml??'').'<br><br>Message :<br>'.$request->message.'<br><br>IP-address : '.($request->ipaddress ?? 'null').'<br>IP-agent : '.($request->agent ?? 'null'),
+            'thanks' => "SILA BALAS JIKA PENTING",
+            'actionText' => 'Reply',
+            'actionURL' => url("mailto: ".$request->email),
+        ];
+        
+        Notification::send($user, new SendEmail($data));
+        return Redirect::back()->with('success',"Message Submitted.</br>Please allow 2 business days for response.");
+    }
 
     public function refundupdate(Request $request)
     {
@@ -37,11 +87,28 @@ class EzbuyController extends Controller
         
         }
         
-        dd($request->all());die;
-        // $zoomapi = json_encode(array('keyone' => $request->keyone , 'keytwo' => $request->keytwo));
-        // User::find($request->subadminid)->update(array('zoomapi'=>$zoomapi));
-        // return redirect()->back()->with('success','設定されました。');
-    
+        Buyforme::where('id',$request->buyid)
+        ->update([
+            'status' => 12 ,
+            'refundbank' => $request->bank ,
+            'refundaccno' => $request->accno ,
+            'refundreceipname' => $request->receipname ,
+        ]);
+        
+    	$user = User::first();
+  
+        $data = [
+            'subject' => 'A New Refund Request #'.$request->buyid,
+            'greeting' => 'Hi '.$user->name.',',
+            'body' => 'New Refund Request.',
+            'thanks' => 'REFUND JE LA CEPAT SIKIT',
+            'actionText' => 'Review',
+            'actionURL' => url('/allorderlist#'.$request->buyid),
+        ];
+  
+        Notification::send($user, new SendEmail($data));
+        return Redirect::back()->with('success',"Refund Request Submitted.</br>Please allow 2 business days for refund.");
+        // dd($request->all());die;
     }
 
     public function allorderlist()

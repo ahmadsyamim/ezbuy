@@ -61,6 +61,18 @@ return [
         '55' => 'Al Rajhi Banking & Investment Corporation',
         '56' => 'Deutsche Bank Aktiengesellschaft',
         '57' => '"PT Bank Muamalat Indonesia, Tbk"',
+    ],
+
+    'contactsubject' => [
+        '0' => 'Please Select Subject',
+        '1' => 'Inquiry',
+        '2' => 'Become A Bulk Purchaser',
+        '3' => 'Career',
+        '4' => 'Others',
+        // '5' => 'Bangkok Bank Berhad',
+        // '6' => 'Bank of America Malaysia Berhad',
+        // '7' => 'Bank of China (Malaysia) Berhad',
     ]
+
 
 ];

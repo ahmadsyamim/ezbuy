@@ -32,6 +32,17 @@
     // }
 </script>
 @endpush
+<style>
+   .iti {
+      width: 100%;
+   }
+</style>
+
+<link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
 <section id="map-overlay">
    <div class="container">
@@ -42,61 +53,81 @@
             <div class="fancy-title title-border">
                <h3>Send us an Email</h3>
             </div>
-            <div class="form-widget">
-               <div class="form-result"></div>
-               <!-- Contact Form
-                  ============================================= -->
-               <form class="row mb-0" id="template-contactform" name="template-contactform" action="include/form.php" method="post" enctype="multipart/form-data">
-                  <div class="col-md-6 form-group">
-                     <label for="template-contactform-name">Name <small>*</small></label>
-                     <input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control required" />
-                  </div>
-                  <div class="col-md-6 form-group">
-                     <label for="template-contactform-email">Email <small>*</small></label>
-                     <input type="email" id="template-contactform-email" name="template-contactform-email" value="" class="required email sm-form-control" />
-                  </div>
-                  <div class="w-100"></div>
-                  <div class="col-md-6 form-group">
-                     <label for="template-contactform-phone">Phone</label>
-                     <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" />
-                  </div>
-                  <div class="col-md-6 form-group">
-                     <label for="template-contactform-service">Services</label>
-                     <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
-                        <option value="">-- Select One --</option>
-                        <option value="Wordpress">Wordpress</option>
-                        <option value="PHP / MySQL">PHP / MySQL</option>
-                        <option value="HTML5 / CSS3">HTML5 / CSS3</option>
-                        <option value="Graphic Design">Graphic Design</option>
-                     </select>
-                  </div>
-                  <div class="w-100"></div>
-                  <div class="col-md-6 form-group">
-                     <label for="template-contactform-subject">Subject <small>*</small></label>
-                     <input type="text" id="template-contactform-subject" name="subject" value="" class="required sm-form-control" />
-                  </div>
-                  <div class="col-md-6 form-group">
-                     <label for="template-contactform-message">Upload CV <small>*</small></label>
-                     <input type="file" id="template-contactform-file" name="template-contactform-file" class="required sm-form-control" />
-                  </div>
-                  <div class="w-100"></div>
-                  <div class="col-12 form-group">
-                     <label for="template-contactform-message">Message <small>*</small></label>
-                     <textarea class="required sm-form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
-                  </div>
-                  <div class="col-12 form-group d-none">
-                     <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="sm-form-control" />
-                  </div>
-                  <div class="col-12 form-group">
-                     <button class="button button-3d m-0" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Send Message</button>
-                  </div>
-                  <input type="hidden" name="prefix" value="template-contactform-">
-               </form>
-            </div>
-            <div class="line"></div>
+            @php $action= route('contactsubmit') ; @endphp
+            <form id="contactsubmit" method="POST" action="{{ $action }}" enctype="multipart/form-data">
+            @csrf
+               <div class="form-widget">
+                  <div class="form-result"></div>
+
+                     <div class="form-process">
+                        <div class="css3-spinner">
+                           <div class="css3-spinner-scaler"></div>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-md-6 form-group">
+                           <label for="name">Name <small>*</small></label>
+                           <input type="text" id="name" name="name" value="{{ old('name') ?? Auth::user()->name ?? '' }}" class="sm-form-control" />
+                           <p style="display:none" class="name error text-danger"></p>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                           <label for="email">Email <small>*</small></label>
+                           <input type="email" id="email" name="email" value="{{ old('email') ?? Auth::user()->email ?? '' }}" class="email sm-form-control" />
+                           <p style="display:none" class="email error text-danger"></p>
+                        </div>
+
+                        <div class="w-100"></div>
+
+                        <div class="col-md-6 form-group">
+                           <label for="phone_number">Phone</label>
+                           <div><input type="tel" id="phone" name="phone_number" value="{{ old('phone_number') ?? Auth::user()->phone_number ?? '' }}" class="sm-form-control" /></div>
+                           <p style="display:none" class="phone_number error text-danger"></p>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                           <label for="subject">Subject <small>*</small></label>
+                           <select id="subject" name="subject" class="sm-form-control">
+                              @foreach (config('global.contactsubject') as $key => $value)
+                              <option value="{{$key}}" >{{__($value)}}</option>
+                              @endforeach
+                           </select>
+                           <p style="display:none" class="subject error text-danger"></p>
+                        </div>
+
+                        <div class="w-100"></div>
+
+                        <div class="col-sm-6 form-group">
+                           <label for="template-contactform-message">Upload </label>
+                           <input type="file" id="attachement" name="attachement" class="required sm-form-control" />
+                           <p style="display:none" class="attachement error text-danger"></p>
+                        </div>
+
+                        <div class="w-100"></div>
+
+                        <div class="col-12 form-group">
+                           <label for="message">Message <small>*</small></label>
+                           <textarea class="sm-form-control" id="message" name="message" rows="8" cols="30"></textarea>
+                           <p style="display:none" class="message error text-danger"></p>
+                        </div>
+
+                        <div class="col-12 form-group d-none">
+                           <input type="text" id="ipaddress" name="ipaddress" value="{{$_SERVER['REMOTE_ADDR'] ?? ''}}" class="sm-form-control" />
+                           <input type="text" id="agent" name="agent" value="{{$_SERVER['HTTP_USER_AGENT'] ?? ''}}" class="sm-form-control" />
+                        </div>
+
+                        <div class="col-12 form-group">
+                           <button class="button button-3d m-0 contactsubmit" type="submit">Send Message</button>
+                        </div>
+                     </div>
+
+
+               </div>
+            </form>
+            <!-- <div class="line"></div>
             <div class="row col-mb-50">
-               <!-- Contact Info
-                  ============================================= -->
+
                <div class="col-md-4">
                   <address>
                      <strong>Headquarters:</strong><br>
@@ -107,23 +138,8 @@
                   <abbr title="Fax"><strong>Fax:</strong></abbr> (1) 11 4752 1433<br>
                   <abbr title="Email Address"><strong>Email:</strong></abbr> info@canvas.com
                </div>
-               <!-- Contact Info End -->
-               <!-- Testimonails
-                  ============================================= -->
-				{{--
-				<div class="col-md-8">
-                  <div class="fslider customjs testimonial twitter-scroll twitter-feed" data-username="envato" data-count="4" data-animation="slide" data-arrows="false">
-                     <i class="i-plain color icon-twitter mb-0" style="margin-right: 15px;"></i>
-                     <div class="flexslider" style="width: auto;">
-                        <div class="slider-wrap">
-                           <div class="slide"></div>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-				--}}
-               <!-- Testimonials End -->
-            </div>
+
+            </div> -->
          </div>
          <!-- Contact Form Overlay End -->
       </div>
@@ -131,7 +147,7 @@
    <!-- Google Map
       ============================================= -->
    <section class="gmap">
-   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d810.809079194378!2d139.6307450292426!3d35.62190028891785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaf3d2fd34eac32f7!2zMzXCsDM3JzE4LjgiTiAxMznCsDM3JzUyLjciRQ!5e0!3m2!1sen!2sjp!4v1659464681347!5m2!1sen!2sjp" width="1800" height="1200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d810.809079194378!2d139.6307450292426!3d35.62190028891785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaf3d2fd34eac32f7!2zMzXCsDM3JzE4LjgiTiAxMznCsDM3JzUyLjciRQ!5e0!3m2!1sen!2sjp!4v1659464681347!5m2!1sen!2sjp" width="1800" height="1000" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
    </section>
 </section>
 
@@ -144,12 +160,86 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
+
 <script>
-    $(function () {
-        $(document).on('click', '.btn-add-product', function () {
-            $(this).addClass('loading');
-        });
-    });
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $(".text-danger").offset().top - $(window).height()/2
+    }, 1500);
 </script>
+
+<script>
+
+   $('#message').attr('placeholder', "Example:\nInquiry for product below:\nhttps://jp.mercari.com/item/m29965203635\n\nLooking forward for your reply,\nThank you.");
+
+	const phoneInputField = document.querySelector("#phone");
+	const phoneInput = window.intlTelInput(phoneInputField, {
+		initialCountry: "auto",
+		geoIpLookup: getIp,
+		preferredCountries: ["my", "sg"],
+		utilsScript:
+		"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+	});
+
+	function getIp(callback) {
+		fetch('https://ipinfo.io/json?token=4ea90b6207ed28', { headers: { 'Accept': 'application/json' }})
+		.then((resp) => resp.json())
+		.catch(() => {
+			return {
+				country: 'us',
+			};
+		})
+		.then((resp) => callback(resp.country));
+	}
+
+   $("#phone").blur(function() {
+      const phoneNumber = phoneInput.getNumber();
+      // alert(phoneNumber);
+      $("input#phone").val(phoneNumber);
+   });
+
+   //https://www.twilio.com/blog/international-phone-number-input-html-javascript // fix later
+
+	$(".contactsubmit").click(function(e) {
+		e.preventDefault();
+
+		// let formData = new FormData(contactsubmit);
+		// console.log(formData);
+		var form = $('form#contactsubmit')[0];
+		var formData = new FormData(form);
+
+		console.log(formData);
+		$.ajax({
+			url: "{{ $action }}",
+			type: 'POST',
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				if ($.isEmptyObject(data.error)) {
+					console.log('okkk :::',data.success);
+					$("form#contactsubmit").submit();
+                    // alert(data.success);
+                    // location.reload();
+
+				} else {
+					// alert("err");
+					console.log(data.error);
+					$('.error').hide()
+					$.each(data.error, function(key, value) {
+						$('.error.' + key).text(value[0])
+						$('.error.' + key).show()
+					});
+				}
+			},
+			fail: function(data) {
+				alert("API fail [0001]");
+			}
+		});
+	});
+
+</script>
+
+@include('ezbuy::layouts.notification')
+
 @endpush
 @endsection

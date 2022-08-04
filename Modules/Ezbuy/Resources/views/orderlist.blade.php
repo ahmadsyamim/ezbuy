@@ -80,15 +80,15 @@
 													<i class="i-rounded i-small i-bordered icon-line-shopping-bag"  data-bs-toggle="tooltip" data-bs-placement="top" title="Bought"></i>
 													@endif
 													@if(in_array($list->status,['7','8','9']))
-													<i class="i-rounded i-small i-bordered icon-line-log-in"  data-bs-toggle="tooltip" data-bs-placement="top" title="received"></i>
+													<i class="i-rounded i-small i-bordered icon-line-log-in"  data-bs-toggle="tooltip" data-bs-placement="top" title="Received"></i>
 													@endif
 													@if(in_array($list->status,['8','9']))
-													<i class="i-rounded i-small i-bordered icon-plane-departure"  data-bs-toggle="tooltip" data-bs-placement="depart from" title="ship-out from country"></i>
+													<i class="i-rounded i-small i-bordered icon-plane-departure"  data-bs-toggle="tooltip" data-bs-placement="depart from" title="Ship-out from country"></i>
 													@endif
 													@if(in_array($list->status,['9']))
 													<i class="i-rounded i-small i-bordered icon-check"  data-bs-toggle="tooltip" data-bs-placement="top" title="Complete"></i>
 													@endif
-													@if(in_array($list->status,['11','13']))
+													@if(in_array($list->status,['11','12']))
 													<i class="i-rounded i-small i-bordered icon-line-cross"  data-bs-toggle="tooltip" data-bs-placement="depart from" title="Fail To Buy, Will Refund"></i>
 													@endif
 													@if(in_array($list->status,['13']))
@@ -153,7 +153,7 @@
 															<select id="bank" name="bank" class="sm-form-control">
 															<!-- // #fixlater //bootstrap-select live search -->
 																@foreach (config('global.banklist') as $key => $value)
-																<option value="{{$key}}" >{{__($value)}}</option>
+																<option value="{{$value}}" >{{__($value)}}</option>
 																@endforeach
 															</select>
 															<p style="display:none" class="bank error text-danger"></p>
@@ -188,7 +188,7 @@
 												
 											</div>
 											<div class="modal-footer">
-												<button class="button button-3d m-0 btn-submit" type="submit">Submit</button>
+												<button class="button button-3d m-0 refundaccount" type="submit">Submit</button>
 												<!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
 											</div>
 										</form>
@@ -272,11 +272,14 @@
 		$("input#buyid").val($(this).attr("data-id"));
 	});
 
-
-	$(".btn-submit").click(function(e) {
+	$(".refundaccount").click(function(e) {
 		e.preventDefault();
-		var _token = $("input[name='_token']").val();
-		let formData = new FormData(refundaccount);
+
+		// let formData = new FormData(refundaccount);
+		// console.log(formData);
+		var form = $('form#refundaccount')[0];
+		var formData = new FormData(form);
+
 		console.log(formData);
 		$.ajax({
 			url: "{{ $action }}",
