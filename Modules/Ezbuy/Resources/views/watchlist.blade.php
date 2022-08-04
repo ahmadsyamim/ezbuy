@@ -62,7 +62,7 @@
 												</div>
 											</div>
 											<div class="product-desc">
-												<div class="product-title"><h3><a href="#">{{Str::limit($list->title, 33, $end='..')}}</a></h3></div>
+												<div class="product-title"><h3><a href="#">[{{$list->id}}]{{Str::limit($list->title, 33, $end='..')}}</a></h3></div>
 												<div class="product-price"><ins><b>MYR</b> 149</ins></div>
 												<!-- <div class="product-rating">
 													<i class="icon-star3"></i>

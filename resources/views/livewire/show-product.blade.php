@@ -78,30 +78,45 @@
             </div>
         </div>
 
+        @if($data->status != '4')
         <div class="col-md-6 form-group">
             <div style="padding: 2rem 0;">
                 <ul class="iconlist" style="justify-content: center; display: grid;">
                     <li><i class="icon-line-box"></i> <strong>MYR</strong> &nbsp;{{$data->sellprice * config('app.rate') }}</li>
-                    <li><i class="icon-shipping-fast"></i> <strong>MYR</strong> &nbsp;{{$data->shippingfee}}</li>
-                    <li><i class="icon-coffee1"></i> <strong>MYR</strong> &nbsp;{{$data->servicefee}}</li>
+                    <li><i class="icon-shipping-fast"></i> <strong>MYR</strong> &nbsp;{{!empty($data->shippingfee) ? $data->shippingfee : '??' }}</li>
+                    <li><i class="icon-coffee1"></i> <strong>MYR</strong> &nbsp;{{!empty($data->shippingfee) ? $data->servicefee : '??' }}</li>
                 </ul>
             </div>
         </div>
+        @endif
 
         <div class="w-100"></div>
 
+        @if(!empty($data->shippingfee))
         <div class="col-12 form-group">
             <label for="template-jobform-email">Total <small>(All Included)</small></label>
             <h2>MYR &nbsp;{{ ($data->sellprice * config('app.rate')) + $data->shippingfee + $data->servicefee }}</h2>
         </div>
+        @endif
 
-        @auth
-        <div class="col-12 form-group">
-            <button class="ui blue button btn-add-product" wire:click="createbill" wire:loading.class="loading">Buy for me</button>
-        </div>
+        @if(!empty($data->shippingfee))
+            @auth
+            <div class="col-12 form-group">
+                <button class="ui blue button btn-add-product" wire:click="createbill" wire:loading.class="loading">Buy for me</button>
+            </div>
+            @else
+            <p>Please <a href="{{route('login', ['intended' => route('ezbuy.item', ['id' => $data->id]) ])}}">Login</a>/<a href="{{route('register')}}">Register</a> to buy.</p>
+            @endauth
+        @elseif($data->status == '4')
+            <h2 class="text-danger">Item Sold Out.</h2>
         @else
-        <p>Please <a href="{{route('login', ['intended' => route('ezbuy.item', ['id' => $data->id]) ])}}">Login</a>/<a href="{{route('register')}}">Register</a> to buy.</p>
-        @endauth
+            <p>Item Category is untraceable.
+                @guest
+                <br>Please <a href="{{route('login', ['intended' => route('ezbuy.item', ['id' => $data->id]) ])}}">Login</a> to log this inquiry.
+                @endguest
+                <br>Our Team will return to you the price immediately.
+            </p>
+        @endif
 </div>
 
 @endif

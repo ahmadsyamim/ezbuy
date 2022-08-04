@@ -16,6 +16,8 @@ Route::get('/contactus', 'EzbuyController@contactus')->name('/contactus');
 Route::post('/muatnaikgambar', 'EzbuyController@storeImage');
 Route::post('/refundupdate', 'EzbuyController@refundupdate')->name('refundupdate');
 Route::post('/contactsubmit', 'EzbuyController@contactsubmit')->name('contactsubmit');
+Route::post('/updatestatus', 'EzbuyController@updatestatus')->name('updatestatus');
+Route::post('/manualupdate', 'EzbuyController@manualupdate')->name('manualupdate');
 
 Route::prefix('ezbuy')->group(function() {
     Route::get('/', 'EzbuyController@index');
@@ -37,4 +39,5 @@ Route::get('/paycheck', '\App\Http\Controllers\BillplzController@paycheck')->nam
 
 Route::middleware(['isAdmin'])->group(function () {
     Route::get('/allorderlist', 'EzbuyController@allorderlist')->name('allorderlist');
+    Route::get('/manualorderlist', 'EzbuyController@manualorderlist')->name('manualorderlist');
 });

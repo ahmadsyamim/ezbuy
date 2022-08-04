@@ -21,6 +21,107 @@ class EzbuyController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
+    public function manualupdate(Request $request)
+    {
+    
+        $valarr = array(
+            'shippingfee' => 'required|integer|max:255',
+            'servicefee' => 'required|integer|max:255',
+                    );
+    
+        $validator = Validator::make($request->all(), $valarr);
+    
+        if($request->ajax()){
+        
+            if ($validator->passes()) {
+                return response()->json(['success'=>true]);
+            }         
+            return response()->json(['error'=>$validator->errors()]);
+        
+        }
+        
+        Buyforme::where('id',$request->buyid)
+        ->update([
+            'status' => 1 ,
+            'shippingfee' => $request->shippingfee ,
+            'servicefee' => $request->servicefee ,
+        ]);
+        
+        return Redirect::back()->with('success',"Order Updated.");
+        // dd($request->all());die;
+    }
+
+    public function manualorderlist()
+    {
+        $limit=10;
+        if (!empty($_GET['kword'])) {
+            $kword = $_GET['kword'];
+        } else {
+            $kword = '';
+        }    
+
+        if (!empty($_GET['start'])) {
+            $start = $_GET['start'];
+            $start = date("Y-m-d 00:00:00",strtotime($start));
+        } else {
+            $start = '';
+        } 
+
+        if (!empty($_GET['end'])) {
+            $end = $_GET['end'];
+            $end = date("Y-m-d 23:59:59",strtotime($end));
+        } else {
+            $end = '';
+        } 
+
+        if (!empty($_GET['id'])) {
+            $id = $_GET['id'];
+        } else {
+            $id = '';
+        } 
+
+        $lists = Buyforme::whereIn('status',['5'])
+                            ->where('user','<>',0)
+                            ->where(function($query) use ($kword , $start , $end , $id){
+                                if (!empty($kword)) {
+                                    $query->where('title','LIKE','%'.$kword.'%')
+                                        ->orwhere('producturl','LIKE','%'.$kword.'%') 
+                                        ;
+                                }
+                                if (!empty($start)) {
+                                    $query->where('paid_at', '>',$start);
+                                }
+                                if (!empty($end)) {
+                                    $query->where('paid_at', '<',$end);
+                                }
+                                if (!empty($id)) {
+                                    $query->where('id', $id);
+                                }
+                            })        
+                            ->orderByDesc('id')->paginate($limit);
+        $ttlpage = (ceil($lists->total() / $limit));
+
+        return view('ezbuy::manualorderlist',compact('lists','ttlpage'));
+    }
+
+     
+    public function updatestatus(Request $request)
+    {
+        $nextstatus = array(
+                    '3' => '7',
+                    '7' => '8',
+                    '8' => '9',
+                    );
+        
+        $data = Buyforme::find($request->buyid);
+        if (!$data) { return Redirect::back()->with('error',"order not found"); }
+        $data->status = $nextstatus[$data->status];
+        $msg = "Status updated to [".$nextstatus[$data->status]."]";
+        $data->save();
+
+        return Redirect::back()->with('success',$msg);
+        // dd($request->all());die;
+    }
 
     public function contactsubmit(Request $request)
     {
@@ -103,7 +204,7 @@ class EzbuyController extends Controller
             'body' => 'New Refund Request.',
             'thanks' => 'REFUND JE LA CEPAT SIKIT',
             'actionText' => 'Review',
-            'actionURL' => url('/allorderlist#'.$request->buyid),
+            'actionURL' => url('/allorderlist?id='.$request->buyid),
         ];
   
         Notification::send($user, new SendEmail($data));
@@ -113,13 +214,54 @@ class EzbuyController extends Controller
 
     public function allorderlist()
     {
-        die('allorderlist');
         $limit=10;
-        $lists = Buyforme::where('user',auth()->user()->id)->orderByDesc('id')->paginate($limit);
+        if (!empty($_GET['kword'])) {
+            $kword = $_GET['kword'];
+        } else {
+            $kword = '';
+        }    
+
+        if (!empty($_GET['start'])) {
+            $start = $_GET['start'];
+            $start = date("Y-m-d 00:00:00",strtotime($start));
+        } else {
+            $start = '';
+        } 
+
+        if (!empty($_GET['end'])) {
+            $end = $_GET['end'];
+            $end = date("Y-m-d 23:59:59",strtotime($end));
+        } else {
+            $end = '';
+        } 
+
+        if (!empty($_GET['id'])) {
+            $id = $_GET['id'];
+        } else {
+            $id = '';
+        } 
+
+        $lists = Buyforme::whereIn('status',['2','3','7','8','9','11','12','13'])
+                            ->where(function($query) use ($kword , $start , $end , $id){
+                                if (!empty($kword)) {
+                                    $query->where('title','LIKE','%'.$kword.'%')
+                                        ->orwhere('producturl','LIKE','%'.$kword.'%') 
+                                        ;
+                                }
+                                if (!empty($start)) {
+                                    $query->where('paid_at', '>',$start);
+                                }
+                                if (!empty($end)) {
+                                    $query->where('paid_at', '<',$end);
+                                }
+                                if (!empty($id)) {
+                                    $query->where('id', $id);
+                                }
+                            })        
+                            ->orderByDesc('id')->paginate($limit);
         $ttlpage = (ceil($lists->total() / $limit));
 
-
-        return view('ezbuy::orderlist',compact('lists','ttlpage'));
+        return view('ezbuy::allorderlist',compact('lists','ttlpage'));
     }
 
      public function contactus()
@@ -187,7 +329,7 @@ class EzbuyController extends Controller
     public function watchlist()
     {   
         $limit=8;
-        $lists = Buyforme::where('user',auth()->user()->id)->whereIn('status',[0,1])->orderByDesc('id')->paginate($limit);
+        $lists = Buyforme::where('user',auth()->user()->id)->whereIn('status',[0,1,5])->orderByDesc('id')->paginate($limit);
         $ttlpage = (ceil($lists->total() / $limit));
 
         return view('ezbuy::watchlist',compact('lists','ttlpage'));

@@ -135,12 +135,16 @@
 
 							<ul class="menu-container">
 								@if (Auth::guest())
-								<li class="menu-item"><a class="menu-link" href="#"><div>Home</div><span>Awesome Works</span></a></li>
-								<li class="menu-item"><a class="menu-link" href="{{ url('/contactus') }}"><div>Contact Us</div><span>Awesome Works</span></a></li>
+								<li class="menu-item"><a class="menu-link" href="#"><div>Home</div></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/contactus') }}"><div>Contact Us</div></a></li>
+								@elseif(Auth::user()->role_id)
+								<li class="menu-item"><a class="menu-link" href="{{ url('/manualorderlist') }}"><div>Manual_Order</div></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/allorderlist') }}"><div>All_Order</div></a></li>
 								@else
-								<li class="menu-item"><a class="menu-link" href="{{ url('/watchlist') }}"><div>Watch List</div><span>Awesome Works</span></a></li>
-								<li class="menu-item"><a class="menu-link" href="{{ url('/orderlist') }}"><div>Order List</div><span>Awesome Works</span></a></li>
-								<li class="menu-item"><a class="menu-link" href="{{ route('voyager-frontend.account') }}"><div>Account</div><span>Awesome Works</span></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/watchlist') }}"><div>Watch List</div></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/orderlist') }}"><div>Order List</div></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/contactus?subject=inquiry') }}"><div>Inquiry</div></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ route('voyager-frontend.account') }}"><div>Account</div></a></li>
 								@endif
 							</ul>
 
