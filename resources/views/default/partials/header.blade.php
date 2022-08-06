@@ -137,6 +137,7 @@
 								@if (Auth::guest())
 								<li class="menu-item"><a class="menu-link" href="#"><div>Home</div></a></li>
 								<li class="menu-item"><a class="menu-link" href="{{ url('/contactus') }}"><div>Contact Us</div></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/flow') }}"><div>How It Work</div></a></li>
 								@elseif(Auth::user()->role_id)
 								<li class="menu-item"><a class="menu-link" href="{{ url('/manualorderlist') }}"><div>Manual_Order</div></a></li>
 								<li class="menu-item"><a class="menu-link" href="{{ url('/allorderlist') }}"><div>All_Order</div></a></li>

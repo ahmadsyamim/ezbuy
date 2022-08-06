@@ -18,6 +18,7 @@ Route::post('/refundupdate', 'EzbuyController@refundupdate')->name('refundupdate
 Route::post('/contactsubmit', 'EzbuyController@contactsubmit')->name('contactsubmit');
 Route::post('/updatestatus', 'EzbuyController@updatestatus')->name('updatestatus');
 Route::post('/manualupdate', 'EzbuyController@manualupdate')->name('manualupdate');
+Route::get('/flow', function () { return view('ezbuy::flow'); });
 
 Route::prefix('ezbuy')->group(function() {
     Route::get('/', 'EzbuyController@index');
