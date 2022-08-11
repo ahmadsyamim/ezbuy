@@ -25,8 +25,8 @@ class EzbuyController extends Controller
     {
     
         $valarr = array(
-            'shippingfee' => 'required|integer|max:255',
-            'servicefee' => 'required|integer|max:255',
+            'shippingfee' => 'required|integer|max:10255',
+            'servicefee' => 'required|integer|max:10255',
                     );
     
         $validator = Validator::make($request->all(), $valarr);
@@ -47,7 +47,7 @@ class EzbuyController extends Controller
             'servicefee' => $request->servicefee ,
         ]);
         
-        return Redirect::back()->with('success',"Order Updated.");
+        return Redirect('/manualorderlist')->with('success',"Order Updated.");
         // dd($request->all());die;
     }
 
@@ -80,8 +80,9 @@ class EzbuyController extends Controller
             $id = '';
         } 
 
-        $lists = Buyforme::whereIn('status',['5'])
-                            ->where('user','<>',0)
+        $lists = Buyforme::where('user','<>',0)
+                            ->where('shippingfee',0)
+                            ->whereIn('status',['5','1'])
                             ->where(function($query) use ($kword , $start , $end , $id){
                                 if (!empty($kword)) {
                                     $query->where('title','LIKE','%'.$kword.'%')

@@ -51,12 +51,15 @@
 											<div class="product-image" style="max-height:300px; width:300px;">
 												<a href="#"><img src="{{ $list->image }}" alt="{{ $list->title }}"></a>
 												<a href="#"><img src="{{ $list->image }}" alt="{{ $list->title }}"></a>
-												<div class="sale-flash badge bg-success p-2">50% Off*</div>
+												<!-- <div class="sale-flash badge bg-success p-2">50% Off*</div> -->
 												<div class="bg-overlay">
 													<div class="bg-overlay-content align-items-end justify-content-between fadeIn" data-hover-speed="400">
 													<!-- <div class="bg-overlay-content align-items-end justify-content-between fadeIn" data-hover-animate="fadeIn" data-hover-speed="400"> -->
-														<a href="#" class="btn btn-dark me-2">BUY</a>
-														<a href="{{ $list->producturl }}" class="btn btn-dark" data-lightbox="ajax" target="_blank"><i class="icon-line-log-out"></i></a>
+														@if(!empty($list->paymentlink))
+														<a href="{{$list->paymentlink}}" class="btn btn-primary me-2">BUY</a>
+														@else
+														<a data-href="{{ $list->producturl }}" class="btn btn-dark newtab" data-lightbox="ajax" target="_blank"><i class="icon-line2-login"></i></a>
+														@endif
 													</div>
 													<div class="bg-overlay-bg bg-transparent"></div>
 												</div>

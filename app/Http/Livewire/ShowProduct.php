@@ -60,7 +60,7 @@ class ShowProduct extends Component
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         // https://republicproxy.com/webhook/&redirect_url=https://republicproxy.com/paycheck/";
         // $data = "collection_id=osjbraql&description=Show Price is Total Price include Item Price , Shipping and Our Sevices Fee.&email=".$email."&mobile=".$mobile."&name=".$name."&amount=".$amount."&reference_1_label=Link&reference_1=".$link."&callback_url=".url('/webhook/&redirect_url='.url()->route('payment.paycheck'));
-        $data = "collection_id=osjbraql&description=Show Price is Total Price include Item Price , Shipping and Our Sevices Fee.&email=".$email."&mobile=".$name."&amount=".$amount."&reference_1_label=Item&reference_1=".$link."&callback_url=".url('/webhook/&redirect_url='.url()->route('payment.paycheck'));
+        $data = "collection_id=osjbraql&description=Show Price is Total Price include Item Price , Shipping and Our Sevices Fee.&email=".$email."&name=".$name."&amount=".$amount."&reference_1_label=Item&reference_1=".$link."&callback_url=".url('/webhook/&redirect_url='.url()->route('payment.paycheck'));
 
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
@@ -70,7 +70,8 @@ class ShowProduct extends Component
 
         $resp = curl_exec($curl);
         curl_close($curl);
-        // var_dump($resp);
+        // var_dump($resp);die;
+        // return redirect('/'.$resp);
 
         $resp = json_decode($resp);
 
@@ -85,45 +86,5 @@ class ShowProduct extends Component
         $this->data = $Buyforme;
 
         return redirect($paymentlink);
-    }
-
-    public function paycheck($signkey = 'S-ERrIvtf1G_Nx18O3yK82wg')
-    {
-
-
-        if (empty($signkey)) {
-            $signkey = self::$x_signature;
-        }
-
-        $data = array(
-            'id' => isset($_GET['billplz']['id']) ? $_GET['billplz']['id'] : throw new \ErrorException('Billplz ID is not supplied'),
-            'paid_at' => isset($_GET['billplz']['paid_at']) ? $_GET['billplz']['paid_at'] : throw new \ErrorException('Please enable Billplz XSignature Payment Completion'),
-            'paid' => isset($_GET['billplz']['paid']) ? $_GET['billplz']['paid'] : throw new \ErrorException('Please enable Billplz XSignature Payment Completion'),
-            'x_signature' => isset($_GET['billplz']['x_signature']) ? $_GET['billplz']['x_signature'] : throw new \ErrorException('Please enable Billplz XSignature Payment Completion'),
-        );
-        $preparedString = '';
-        foreach ($data as $key => $value) {
-            $preparedString .= 'billplz' . $key . $value;
-            if ($key === 'paid') {
-                break;
-            } else {
-                $preparedString .= '|';
-            }
-        }
-        $generatedSHA = hash_hmac('sha256', $preparedString, $signkey);
-
-        /*
-         * Convert paid status to boolean
-         */
-        $data['paid'] = $data['paid'] === 'true' ? true : false;
-
-        if ($data['x_signature'] === $generatedSHA) {
-            return $data;
-        } else {
-            throw new \ErrorException('Data has been tempered');
-        }
-        // https://republicproxy.com/paycheck/?billplz%5Bid%5D=orbkffvq&billplz%5Bpaid%5D=true&billplz%5Bpaid_at%5D=2022-06-29+01%3A14%3A06+%2B0800&billplz%5Bx_signature%5D=8c5a4a02f2207f93d293d65fa09128e27ddf4515d5b543a234ad578463e62b24
-        // reference : https://www.billplz.com/api#payment-completion-x-signature-redirect-url
-
     }
 }

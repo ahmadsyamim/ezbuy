@@ -55,7 +55,7 @@
 										</div>
 										<div class="col-lg col-md-8 mt-4 mt-lg-0">
 											<div class="entry-title title-sm">
-												<h2><a href="blog-single.html">[{{ $list->id }}] [{{ $list->status }}] {{Str::limit($list->title, 33, $end='..')}}</a></h2>
+												<h2><a href="blog-single.html">[ID: {{ $list->id }}]{{Str::limit($list->title, 33, $end='..')}}</a></h2>
 											</div>
 											<div class="entry-meta">
 												<ul>
@@ -72,9 +72,7 @@
 												<b>MYR</b> {{ ($list->sellprice * config('app.rate')) }}
 											</div>
 											<small><em>Total Price</em></small><br>
-											@if(in_array($list->status,['5']))
 											<a data-id="{{ $list->id }}" data-itemprice="{{ ($list->sellprice * config('app.rate')) }}" data-bs-toggle="modal" data-bs-target="#manualupdateModal" class="button button-rounded mt-4 mx-0 bg-danger refundbtn"><i class="icon-line-alert-circle"></i>UPDATE</a>
-											@endif
 										</div>
 									</div>
 								</div>

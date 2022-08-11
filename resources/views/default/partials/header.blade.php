@@ -9,7 +9,7 @@
 
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
-						<p class="mb-0 py-2 text-center text-md-start"><strong>Call:</strong> {{setting('site.phone_number')}} | <strong>Email:</strong> {{setting('site.email')}}</p>
+						<p class="mb-0 py-2 text-center text-md-start"> Your favourite <strong>Shopping Forwarder</strong> from Japan to Malaysia | <strong>Email:</strong> {{ 'hi@republicproxy.my' }}</p>
 					</div>
 
 					<div class="col-12 col-md-auto">
@@ -136,8 +136,9 @@
 							<ul class="menu-container">
 								@if (Auth::guest())
 								<li class="menu-item"><a class="menu-link" href="#"><div>Home</div></a></li>
-								<li class="menu-item"><a class="menu-link" href="{{ url('/contactus') }}"><div>Contact Us</div></a></li>
 								<li class="menu-item"><a class="menu-link" href="{{ url('/flow') }}"><div>How It Work</div></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/faqs') }}"><div>FAQ</div></a></li>
+								<li class="menu-item"><a class="menu-link" href="{{ url('/contactus') }}"><div>Contact Us</div></a></li>
 								@elseif(Auth::user()->role_id)
 								<li class="menu-item"><a class="menu-link" href="{{ url('/manualorderlist') }}"><div>Manual_Order</div></a></li>
 								<li class="menu-item"><a class="menu-link" href="{{ url('/allorderlist') }}"><div>All_Order</div></a></li>
