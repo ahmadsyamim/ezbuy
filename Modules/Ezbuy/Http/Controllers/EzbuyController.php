@@ -117,7 +117,7 @@ class EzbuyController extends Controller
         $data = Buyforme::find($request->buyid);
         if (!$data) { return Redirect::back()->with('error',"order not found"); }
         $data->status = $nextstatus[$data->status];
-        $msg = "Status updated to [".$nextstatus[$data->status]."]";
+        $msg = "Status Updated";
         $data->save();
 
         return Redirect::back()->with('success',$msg);

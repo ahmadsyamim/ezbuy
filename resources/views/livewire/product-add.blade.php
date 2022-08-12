@@ -36,7 +36,8 @@
 
                     <div class="col-12 form-group">
                         <label for="template-jobform-application">Product URL <small>*</small> :</label>
-                        <textarea wire:model="search" name="template-jobform-application" id="template-jobform-application" rows="6" tabindex="11" class="sm-form-control required"></textarea>
+                        <textarea wire:model="search" name="template-jobform-application" id="template-jobform-application" rows="6" tabindex="11" class="sm-form-control required" placeholder="https://jp.mercari.com/item/m74143617649"></textarea>
+                        <span class="text-danger">Currently, Auto Quotation is only working with mercari.jp</span>
                     </div>
 
                     <div class="col-12 form-group d-none">
@@ -63,8 +64,6 @@
                     console.log('e',e.detail.data);
                     if (e.detail.data.title) {
                         $('.btn-add-product').removeClass('loading');
-                        alert('2121');
-                        clearInterval(interval);
                     }
                     interval = setInterval(function() {
                         console.log('interval');

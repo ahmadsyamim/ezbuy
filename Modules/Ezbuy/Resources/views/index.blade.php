@@ -40,7 +40,7 @@
 				<div class="container clearfix">
 
 					<div class="fancy-title title-border title-center topmargin-sm">
-						<h4>Popular Brands</h4>
+						<h4>Popular Platforms</h4>
 					</div>
 
 					<ul class="clients-grid grid-2 grid-sm-3 grid-md-6 mb-0">
